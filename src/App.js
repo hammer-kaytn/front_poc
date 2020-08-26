@@ -4,6 +4,7 @@ import caver from "./klaytn/caver";
 import WalletInfo from "./components/WalletInfo";
 import Staking from "./components/Staking";
 import Sending from "./components/send";
+import TxList from './components/TxLists';
 
 const DEPLOYED_ADDRESS = "0x00a6abA7Dc038296db014D8Ef9d8C70982E589BC";
 
@@ -94,7 +95,15 @@ class App extends Component {
           symbol={symbol}
           totalSupply={totalSupply}
         />
-        {account.length > 0 && <Sending />}
+        {account.length > 0 && 
+        <Sending />
+        }
+        {account.length > 0 && 
+        <Staking />
+        }
+        {account.length > 0 && 
+        <TxList address={account} />
+        }
       </div>
     );
   }

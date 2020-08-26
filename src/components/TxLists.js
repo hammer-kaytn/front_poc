@@ -34,7 +34,7 @@ export default function TableList() {
   if (!txlists) return null;
 
   return (
-
+<div>
 <Table aria-label="simple table">
                 <thead>
                   <tr>
@@ -56,14 +56,18 @@ export default function TableList() {
                   {txlists.map((txList) => (
                     <tr key={txList.id}>
                       <th component="th" scope="row">
-                         <a href = "https://baobab.scope.klaytn.com/tx/<%=txList.transactionHash%>?tabId=kctTransfer">{txList.transactionHash}</a>
+                         <a href = "https://baobab.scope.klaytn.com/tx/<%={txList.transactionHash}%>?tabId=kctTransfer">{(txList.transactionHash).substring(0,10)}...</a>
                       </th>
-                      <th align="center">{txList.from}</th>
-                      <th align="center">{txList.to}</th>
+                      <th align="center">{(txList.from).substring(0,10)}...</th>
+                      <th align="center">{(txList.to).substring(0,10)}...</th>
                       <th align="center">{txList.value}</th>
                     </tr>
                   ))}
                 </tbody>
               </Table>
+
+              
+              
+              </div>
   );
 }
