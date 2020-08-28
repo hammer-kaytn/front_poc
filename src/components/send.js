@@ -11,7 +11,7 @@ class TransferLegacy extends Component {
       to: "",
       value: "",
       gas: 3000000,
-      contractAddress: "0x00a6abA7Dc038296db014D8Ef9d8C70982E589BC",
+      contractAddress: "0x6c03D39CDd30fdbec487304b3F1A446c37df543f",
     };
   }
 
@@ -48,7 +48,9 @@ class TransferLegacy extends Component {
 
   tokenTransaction = () => {
     const { from, contractAddress, to, value, gas } = this.state;
-    console.log(value);
+    const amount = caver.utils.toPeb(value.toString(), "KLAY")
+    console.log(value)
+    console.log(amount);
     const data = caver.klay.abi.encodeFunctionCall(
       {
         name: "transfer",
@@ -60,15 +62,16 @@ class TransferLegacy extends Component {
           },
           {
             type: "uint256",
-            name: "value",
+            name: "amount"
           },
         ],
       },
-      [to, value * 100000000]
+      [to, caver.utils.toPeb(value, 'KLAY')]
     );
 
     caver.klay
       .sendTransaction({
+        type: 'SMART_CONTRACT_EXECUTION',
         from,
         to: contractAddress,
         data,

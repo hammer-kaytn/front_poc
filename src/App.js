@@ -6,7 +6,7 @@ import Staking from "./components/Staking";
 import Sending from "./components/send";
 import TxList from './components/TxLists';
 
-const DEPLOYED_ADDRESS = "0x00a6abA7Dc038296db014D8Ef9d8C70982E589BC";
+const DEPLOYED_ADDRESS = "0x6c03D39CDd30fdbec487304b3F1A446c37df543f";
 
 require("dotenv").config();
 
