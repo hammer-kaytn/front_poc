@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 
-import Table from 'react-bootstrap/Table'
+import Table from "react-bootstrap/Table";
 
 export default function TableList() {
-
   const axios = require("axios");
   const [txlists, setTxlists] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,8 +16,8 @@ export default function TableList() {
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get("http://localhost:5000/api/transfers");
-      setTxlists(response.data.items)
-      console.log(response.data.items)
+      setTxlists(response.data.items);
+      console.log(response.data.items);
     } catch (e) {
       setError(e);
     }
@@ -34,40 +33,39 @@ export default function TableList() {
   if (!txlists) return null;
 
   return (
-<div>
-<Table aria-label="simple table">
-                <thead>
-                  <tr>
-                    <th>
-                      <b>TX HASH</b>
-                      </th>
-                      <th>
-                      <b>FROM</b>
-                      </th>
-                      <th>
-                      <b>TO</b>
-                      </th>
-                      <th>
-                      <b>VALUE</b>
-                      </th>
-                    </tr>
-                  </thead>
-                <tbody>
-                  {txlists.map((txList) => (
-                    <tr key={txList.id}>
-                      <th component="th" scope="row">
-                         <a href = "https://baobab.scope.klaytn.com/tx/<%={txList.transactionHash}%>?tabId=kctTransfer">{(txList.transactionHash).substring(0,10)}...</a>
-                      </th>
-                      <th align="center">{(txList.from).substring(0,10)}...</th>
-                      <th align="center">{(txList.to).substring(0,10)}...</th>
-                      <th align="center">{txList.value}</th>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-
-              
-              
-              </div>
+    <div>
+      <Table aria-label="simple table">
+        <thead>
+          <tr>
+            <th>
+              <b>TX HASH</b>
+            </th>
+            <th>
+              <b>FROM</b>
+            </th>
+            <th>
+              <b>TO</b>
+            </th>
+            <th>
+              <b>VALUE</b>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {txlists.map((txList) => (
+            <tr key={txList.id}>
+              <th component="th" scope="row">
+                <a href="https://baobab.scope.klaytn.com/tx/<%={txList.transactionHash}%>?tabId=kctTransfer">
+                  {txList.transactionHash.substring(0, 10)}...
+                </a>
+              </th>
+              <th align="center">{txList.from.substring(0, 10)}...</th>
+              <th align="center">{txList.to.substring(0, 10)}...</th>
+              <th align="center">{txList.value}</th>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 }

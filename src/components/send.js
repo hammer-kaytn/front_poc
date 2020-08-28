@@ -3,6 +3,10 @@ import caver from "../klaytn/caver";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
+import * as config from "../config";
+
+const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
+
 class TransferLegacy extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +15,7 @@ class TransferLegacy extends Component {
       to: "",
       value: "",
       gas: 3000000,
-      contractAddress: "0x6c03D39CDd30fdbec487304b3F1A446c37df543f",
+      contractAddress: DEPLOYED_ADDRESS,
     };
   }
 
@@ -48,9 +52,6 @@ class TransferLegacy extends Component {
 
   tokenTransaction = () => {
     const { from, contractAddress, to, value, gas } = this.state;
-    const amount = caver.utils.toPeb(value.toString(), "KLAY")
-    console.log(value)
-    console.log(amount);
     const data = caver.klay.abi.encodeFunctionCall(
       {
         name: "transfer",
@@ -62,16 +63,16 @@ class TransferLegacy extends Component {
           },
           {
             type: "uint256",
-            name: "amount"
+            name: "amount",
           },
         ],
       },
-      [to, caver.utils.toPeb(value, 'KLAY')]
+      [to, caver.utils.toPeb(value, "KLAY")]
     );
 
     caver.klay
       .sendTransaction({
-        type: 'SMART_CONTRACT_EXECUTION',
+        type: "SMART_CONTRACT_EXECUTION",
         from,
         to: contractAddress,
         data,
@@ -93,7 +94,7 @@ class TransferLegacy extends Component {
   };
 
   render() {
-    const { from, to, value, gas } = this.state;
+    const { from, to, value } = this.state;
     return (
       <div>
         <Form>

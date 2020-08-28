@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import caver from "./klaytn/caver";
-
 import WalletInfo from "./components/WalletInfo";
 import Staking from "./components/Staking";
 import Sending from "./components/send";
-import TxList from './components/TxLists';
+import TxList from "./components/TxLists";
+import * as config from "./config";
 
-const DEPLOYED_ADDRESS = "0x6c03D39CDd30fdbec487304b3F1A446c37df543f";
-
-require("dotenv").config();
+const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 
 class App extends Component {
   constructor(props) {
@@ -60,8 +58,8 @@ class App extends Component {
       balance: caver.utils.fromPeb(balance, "KLAY"),
       name,
       symbol,
-      totalSupply: caver.utils.fromPeb(totalSupply, "Mpeb") / 100,
-      tokenBalance: caver.utils.fromPeb(tokenBalance, "Mpeb") / 100,
+      totalSupply: caver.utils.fromPeb(totalSupply, "KLAY"),
+      tokenBalance: caver.utils.fromPeb(tokenBalance, "KLAY"),
     });
   };
 
@@ -95,15 +93,9 @@ class App extends Component {
           symbol={symbol}
           totalSupply={totalSupply}
         />
-        {account.length > 0 && 
-        <Sending />
-        }
-        {account.length > 0 && 
-        <Staking />
-        }
-        {account.length > 0 && 
-        <TxList address={account} />
-        }
+        {account.length > 0 && <Sending />}
+        {account.length > 0 && <Staking />}
+        {account.length > 0 && <TxList address={account} />}
       </div>
     );
   }

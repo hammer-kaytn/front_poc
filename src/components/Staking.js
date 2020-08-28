@@ -3,15 +3,23 @@ import caver from "../klaytn/caver";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
+import * as config from "../config";
+
+const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
+const DEPLOYED_ABI = config.DEPLOYED_ABI;
+
 class Staking extends Component {
   constructor(props) {
     super(props);
+    this.stakingContract = new caver.klay.Contract(
+      DEPLOYED_ABI,
+      DEPLOYED_ADDRESS
+    );
     this.state = {
-      from: props.address,
-      to: "",
+      from: "",
+      to: DEPLOYED_ADDRESS,
       value: "",
       gas: 3000000,
-      contractAddress: "0x00a6abA7Dc038296db014D8Ef9d8C70982E589BC",
     };
   }
 
@@ -21,18 +29,70 @@ class Staking extends Component {
     });
   };
 
+  stakingTransaction = () => {
+    const { from, value, gas } = this.state;
+    this.stakingContract.methods
+      .Staking()
+      .send({
+        from,
+        gas,
+        value: caver.utils.toPeb(value, "KLAY"),
+      })
+      .on("transactionHash", (transactionHash) => {
+        console.log("txHash", transactionHash);
+        this.setState({ txHash: transactionHash });
+      })
+      .on("receipt", (receipt) => {
+        console.log("receipt", receipt);
+        this.setState({ receipt: JSON.stringify(receipt) });
+        document.location.href = "/";
+      })
+      .on("error", (error) => {
+        console.log("error", error);
+        this.setState({ error: error.message });
+      });
+  };
 
+  unstakingTransaction = () => {
+    const { from, value, gas } = this.state;
 
+    const amount = caver.utils.toPeb(value, "KLAY");
+    this.stakingContract.methods
+      .Unstaking(amount)
+      .send({
+        from,
+        gas,
+      })
+      .on("transactionHash", (transactionHash) => {
+        console.log("txHash", transactionHash);
+        this.setState({ txHash: transactionHash });
+      })
+      .on("receipt", (receipt) => {
+        console.log("receipt", receipt);
+        this.setState({ receipt: JSON.stringify(receipt) });
+        document.location.href = "/";
+      })
+      .on("error", (error) => {
+        console.log("error", error);
+        this.setState({ error: error.message });
+      });
+  };
 
   render() {
-    const { from, to, value, gas } = this.state;
+    const { from, value } = this.state;
     return (
       <div>
         <Form>
           <h4>스테이킹/언스테이킹</h4>
-          <Form.Group controlId="formBasicEmail">
-
-            <Form.Label>스테이킹 할 수량</Form.Label>
+          <Form.Group>
+            <Form.Label>보내는 주소</Form.Label>
+            <Form.Control
+              name="from"
+              label="From"
+              value={from}
+              onChange={this.handleChange}
+            />
+            <Form.Label>스테이킹/언스테이킹 할 수량</Form.Label>
             <Form.Control
               name="value"
               label="Value"
@@ -43,6 +103,7 @@ class Staking extends Component {
           <Button variant="primary" onClick={this.stakingTransaction}>
             스테이킹
           </Button>
+
           <Button variant="warning" onClick={this.unstakingTransaction}>
             언스테이킹
           </Button>
