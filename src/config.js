@@ -1,4 +1,4 @@
-export const DEPLOYED_ADDRESS = "0x9d7563F61272faf919e96DaD7ff7D452d2e2D291";
+export const DEPLOYED_ADDRESS = "0xD41dC3aE9064Ca7d98D9eA688B6b36894ec8E596";
 export const DEPLOYED_ABI = [
   {
     constant: true,
@@ -9,6 +9,16 @@ export const DEPLOYED_ABI = [
     stateMutability: "view",
     type: "function",
     signature: "0x01ffc9a7",
+  },
+  {
+    constant: true,
+    inputs: [{ name: "", type: "uint256" }],
+    name: "owners",
+    outputs: [{ name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0x025e7c27",
   },
   {
     constant: true,
@@ -59,6 +69,16 @@ export const DEPLOYED_ABI = [
   },
   {
     constant: true,
+    inputs: [{ name: "", type: "address" }],
+    name: "isOwner",
+    outputs: [{ name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0x2f54bf6e",
+  },
+  {
+    constant: true,
     inputs: [],
     name: "decimals",
     outputs: [{ name: "", type: "uint8" }],
@@ -66,6 +86,19 @@ export const DEPLOYED_ABI = [
     stateMutability: "view",
     type: "function",
     signature: "0x313ce567",
+  },
+  {
+    constant: true,
+    inputs: [
+      { name: "", type: "uint256" },
+      { name: "", type: "address" },
+    ],
+    name: "confirmations",
+    outputs: [{ name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0x3411c81c",
   },
   {
     constant: false,
@@ -167,22 +200,27 @@ export const DEPLOYED_ABI = [
   {
     constant: true,
     inputs: [],
-    name: "owner",
-    outputs: [{ name: "", type: "address" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x8da5cb5b",
-  },
-  {
-    constant: true,
-    inputs: [],
     name: "symbol",
     outputs: [{ name: "", type: "string" }],
     payable: false,
     stateMutability: "view",
     type: "function",
     signature: "0x95d89b41",
+  },
+  {
+    constant: true,
+    inputs: [{ name: "", type: "uint256" }],
+    name: "transactions",
+    outputs: [
+      { name: "destination", type: "address" },
+      { name: "value", type: "uint256" },
+      { name: "data", type: "bytes" },
+      { name: "executed", type: "bool" },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0x9ace38c2",
   },
   {
     constant: false,
@@ -198,6 +236,16 @@ export const DEPLOYED_ABI = [
     signature: "0xa9059cbb",
   },
   {
+    constant: true,
+    inputs: [],
+    name: "transactionCount",
+    outputs: [{ name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0xb77bf600",
+  },
+  {
     constant: false,
     inputs: [
       { name: "sender", type: "address" },
@@ -211,6 +259,16 @@ export const DEPLOYED_ABI = [
     stateMutability: "nonpayable",
     type: "function",
     signature: "0xb88d4fde",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "required",
+    outputs: [{ name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0xdc8452cd",
   },
   {
     constant: true,
@@ -241,6 +299,8 @@ export const DEPLOYED_ABI = [
   },
   {
     inputs: [
+      { name: "_owners", type: "address[]" },
+      { name: "_required", type: "uint256" },
       { name: "name", type: "string" },
       { name: "symbol", type: "string" },
       { name: "decimals", type: "uint8" },
@@ -250,6 +310,7 @@ export const DEPLOYED_ABI = [
     type: "constructor",
     signature: "constructor",
   },
+  { payable: true, stateMutability: "payable", type: "fallback" },
   {
     anonymous: false,
     inputs: [
@@ -271,6 +332,52 @@ export const DEPLOYED_ABI = [
     type: "event",
     signature:
       "0xc6028b427fa55e47477f154025363ebe9b6b8cf69e982fc339c40e1415cd383c",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, name: "sender", type: "address" },
+      { indexed: true, name: "transactionId", type: "uint256" },
+    ],
+    name: "Confirmation",
+    type: "event",
+    signature:
+      "0x4a504a94899432a9846e1aa406dceb1bcfd538bb839071d49d1e5e23f5be30ef",
+  },
+  {
+    anonymous: false,
+    inputs: [{ indexed: true, name: "transactionId", type: "uint256" }],
+    name: "Execution",
+    type: "event",
+    signature:
+      "0x33e13ecb54c3076d8e8bb8c2881800a4d972b792045ffae98fdf46df365fed75",
+  },
+  {
+    anonymous: false,
+    inputs: [{ indexed: true, name: "transactionId", type: "uint256" }],
+    name: "ExecutionFailure",
+    type: "event",
+    signature:
+      "0x526441bb6c1aba3c9a4a6ca1d6545da9c2333c8c48343ef398eb858d72b79236",
+  },
+  {
+    anonymous: false,
+    inputs: [{ indexed: true, name: "transactionId", type: "uint256" }],
+    name: "Submission",
+    type: "event",
+    signature:
+      "0xc0ba8fe4b176c1714197d43b9cc6bcf797a4a7461c5fe8d0ef6e184ae7601e51",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, name: "sender", type: "address" },
+      { indexed: false, name: "value", type: "uint256" },
+    ],
+    name: "Deposit",
+    type: "event",
+    signature:
+      "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c",
   },
   {
     anonymous: false,
@@ -351,14 +458,45 @@ export const DEPLOYED_ABI = [
   {
     constant: false,
     inputs: [
-      { name: "_to", type: "address" },
-      { name: "amount", type: "uint256" },
+      { name: "destination", type: "address" },
+      { name: "value", type: "uint256" },
+      { name: "data", type: "bytes" },
     ],
-    name: "TransferToStaker",
+    name: "submitTransaction",
+    outputs: [{ name: "transactionId", type: "uint256" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+    signature: "0xc6427474",
+  },
+  {
+    constant: false,
+    inputs: [{ name: "transactionId", type: "uint256" }],
+    name: "confirmTransaction",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0xdf6cf360",
+    signature: "0xc01a8c84",
+  },
+  {
+    constant: false,
+    inputs: [{ name: "transactionId", type: "uint256" }],
+    name: "executeTransaction",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+    signature: "0xee22610b",
+  },
+  {
+    constant: true,
+    inputs: [{ name: "transactionId", type: "uint256" }],
+    name: "isConfirmed",
+    outputs: [{ name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+    signature: "0x784547a7",
   },
 ];

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import caver from "../klaytn/caver";
+import caver from "../../klaytn/caver";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-import * as config from "../config";
+import * as config from "../../config";
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 
-class TransferLegacy extends Component {
+class TransferToken extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,35 +19,17 @@ class TransferLegacy extends Component {
     };
   }
 
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    if (nextProps.address !== prevState.address) {
+      return { from: nextProps.address };
+    }
+    return null;
+  };
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-  };
-
-  signTransaction = () => {
-    const { from, to, value, gas } = this.state;
-
-    caver.klay
-      .sendTransaction({
-        from,
-        to,
-        value: caver.utils.toPeb(value.toString(), "KLAY"),
-        gas,
-      })
-      .once("transactionHash", (transactionHash) => {
-        console.log("txHash", transactionHash);
-        this.setState({ txHash: transactionHash });
-      })
-      .once("receipt", (receipt) => {
-        console.log("receipt", receipt);
-        this.setState({ receipt: JSON.stringify(receipt) });
-        document.location.href = "/";
-      })
-      .once("error", (error) => {
-        console.log("error", error);
-        this.setState({ error: error.message });
-      });
   };
 
   tokenTransaction = () => {
@@ -85,7 +67,7 @@ class TransferLegacy extends Component {
       .on("receipt", (receipt) => {
         console.log("receipt", receipt);
         this.setState({ receipt: JSON.stringify(receipt) });
-        document.location.href = "/";
+        document.location.href = "/mypage/token/";
       })
       .on("error", (error) => {
         console.log("error", error);
@@ -98,36 +80,28 @@ class TransferLegacy extends Component {
     return (
       <div>
         <Form>
-          <h4>클레이/토큰 전송</h4>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>보내는 주소</Form.Label>
+          <p className="font-bold-700 font-1H padding-top-1e font-color-lightgray">
+            토큰 전송
+          </p>
+          <Form.Group>
+            <Form.Label>보내는 수량</Form.Label>
             <Form.Control
-              required
-              name="from"
-              label="From"
-              value={from}
+              name="value"
+              value={value}
               onChange={this.handleChange}
             />
             <Form.Label>받는 주소</Form.Label>
             <Form.Control name="to" value={to} onChange={this.handleChange} />
-            <Form.Label>보내는 클레이/토큰</Form.Label>
-            <Form.Control
-              name="value"
-              label="Value"
-              value={value}
-              onChange={this.handleChange}
-            />
           </Form.Group>
-          <Button variant="primary" onClick={this.signTransaction}>
-            클레이 전송
-          </Button>
+
           <Button variant="warning" onClick={this.tokenTransaction}>
-            해머토큰 전송
+            전송
           </Button>
+          <div className="line"></div>
         </Form>
       </div>
     );
   }
 }
 
-export default TransferLegacy;
+export default TransferToken;

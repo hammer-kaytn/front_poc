@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import caver from "../klaytn/caver";
+import caver from "../../klaytn/caver";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-import * as config from "../config";
+import * as config from "../../config";
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
-class Staking extends Component {
+class BuyToken extends Component {
   constructor(props) {
     super(props);
     this.stakingContract = new caver.klay.Contract(
@@ -16,12 +16,19 @@ class Staking extends Component {
       DEPLOYED_ADDRESS
     );
     this.state = {
-      from: "",
+      from: props.address,
       to: DEPLOYED_ADDRESS,
       value: "",
       gas: 3000000,
     };
   }
+
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    if (nextProps.address !== prevState.address) {
+      return { from: nextProps.address };
+    }
+    return null;
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -29,7 +36,7 @@ class Staking extends Component {
     });
   };
 
-  stakingTransaction = () => {
+  BuyTokenTransaction = () => {
     const { from, value, gas } = this.state;
     this.stakingContract.methods
       .Staking()
@@ -45,32 +52,7 @@ class Staking extends Component {
       .on("receipt", (receipt) => {
         console.log("receipt", receipt);
         this.setState({ receipt: JSON.stringify(receipt) });
-        document.location.href = "/";
-      })
-      .on("error", (error) => {
-        console.log("error", error);
-        this.setState({ error: error.message });
-      });
-  };
-
-  unstakingTransaction = () => {
-    const { from, value, gas } = this.state;
-
-    const amount = caver.utils.toPeb(value, "KLAY");
-    this.stakingContract.methods
-      .Unstaking(amount)
-      .send({
-        from,
-        gas,
-      })
-      .on("transactionHash", (transactionHash) => {
-        console.log("txHash", transactionHash);
-        this.setState({ txHash: transactionHash });
-      })
-      .on("receipt", (receipt) => {
-        console.log("receipt", receipt);
-        this.setState({ receipt: JSON.stringify(receipt) });
-        document.location.href = "/";
+        document.location.href = "/mypage/token/";
       })
       .on("error", (error) => {
         console.log("error", error);
@@ -83,34 +65,25 @@ class Staking extends Component {
     return (
       <div>
         <Form>
-          <h4>스테이킹/언스테이킹</h4>
+          <p className="font-bold-700 font-1H font-color-lightgray">
+            토큰 구매
+          </p>
           <Form.Group>
-            <Form.Label>보내는 주소</Form.Label>
-            <Form.Control
-              name="from"
-              label="From"
-              value={from}
-              onChange={this.handleChange}
-            />
-            <Form.Label>스테이킹/언스테이킹 할 수량</Form.Label>
+            <Form.Label>구매 수량</Form.Label>
             <Form.Control
               name="value"
-              label="Value"
               value={value}
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Button variant="primary" onClick={this.stakingTransaction}>
-            스테이킹
+          <Button variant="primary" onClick={this.BuyTokenTransaction}>
+            구매
           </Button>
-
-          <Button variant="warning" onClick={this.unstakingTransaction}>
-            언스테이킹
-          </Button>
+          <div className="line"></div>
         </Form>
       </div>
     );
   }
 }
 
-export default Staking;
+export default BuyToken;

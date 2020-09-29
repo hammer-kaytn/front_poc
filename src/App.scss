@@ -1,0 +1,253 @@
+$menu-name-font-size: 2em;
+$page-background-color: #f5f5f5;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-gray: #292929;
+$color-lightgray: #525151;
+$color-pink: #f50057;
+$color-lightblue: #abb0ea;
+$font-bold: bold;
+
+.App {
+  text-align: center;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.background-color-gray {
+  background-color: $page-background-color;
+}
+
+.background-color-white {
+  background-color: #ffffff;
+}
+
+.keyword-gray {
+  background-color: #eeeeee;
+  color: #333;
+  border-radius: 3px;
+  padding: 3px 3px;
+}
+
+.keyword-yellow {
+  background-color: #ffff7e;
+  color: #333;
+  border-radius: 3px;
+  padding: 3px 3px;
+}
+
+// font 관련 SCSS
+.font-red {
+  color: #ff0000;
+}
+
+.font-bold {
+  font-weight: $font-bold;
+}
+
+.font-bold-700 {
+  font-weight: 700;
+}
+
+.font-bold-900 {
+  font-weight: 900;
+}
+
+.font-07 {
+  font-size: 0.7em;
+}
+
+.font-1H {
+  font-size: 1.5em;
+}
+
+.font-2 {
+  font-size: 2em;
+}
+
+.font-color-bl {
+  color: $color-black;
+}
+
+.font-color-white {
+  color: $color-white;
+}
+
+.font-color-gray {
+  color: $color-gray;
+}
+
+.font-color-lightgray {
+  color: $color-lightgray;
+}
+
+.font-color-pink {
+  color: $color-pink;
+}
+
+.font-color-lightblue {
+  color: $color-lightblue;
+}
+
+.font-color-deepgray {
+  color: #000005;
+}
+
+// menu name 관련 SCSS
+.menu-name {
+  font-size: $menu-name-font-size;
+  font-weight: $font-bold;
+  margin-bottom: 70px;
+}
+
+.menu-name:after {
+  content: "";
+  display: block;
+  width: 50px;
+  border-bottom: 2px solid $color-pink;
+  margin: 10px auto;
+}
+
+// icon 크기 관련 SCSS
+.icon-size {
+  font-size: 4em;
+}
+
+.icon-size-1e {
+  font-size: 1em;
+}
+
+.icon-size-2e {
+  font-size: 2em;
+}
+
+.icon-size-2He {
+  font-size: 2.5em;
+}
+
+.icon-color {
+  color: #000000;
+}
+
+/* padding 관련 CSS */
+.padding-top-02e {
+  padding-top: 0.2em;
+}
+
+.padding-top-03e {
+  padding-top: 0.3em;
+}
+
+.padding-top-1e {
+  padding-top: 1em;
+}
+
+.padding-top-2e {
+  padding-top: 2em;
+}
+
+.padding-top-5e {
+  padding-top: 5em;
+}
+
+.padding-top-7e {
+  padding-top: 7em;
+}
+
+.padding-btm-1e {
+  padding-bottom: 1em;
+}
+
+.padding-top-btm-05e {
+  padding: 0.5em 0;
+}
+
+.padding-top-btm-1e {
+  padding: 1em 0;
+}
+
+.padding-top-btm-2e {
+  padding: 2em 0;
+}
+
+.padding-top-btm-3e {
+  padding: 3em 0;
+}
+
+.padding-top-btm-4e {
+  padding: 4em 0;
+}
+
+.padding-top-btm-5e {
+  padding: 5em 0;
+}
+
+.padding-left-right-05e {
+  padding: 0 0.5em;
+}
+
+.padding-left-right-1e {
+  padding: 0 1em;
+}
+
+.margin-top-3e {
+  margin-top: 3em;
+}
+
+.margin-left-1e {
+  margin-left: 1em;
+}
+
+.margin-right-03e {
+  margin-right: 0.3em;
+}
+
+.margin-left-right-03e {
+  margin: 0 0.3em;
+}
+
+.line {
+  border-color: $color-lightblue;
+  border-style: solid;
+  border-width: thin;
+  margin: 20px 0;
+}
+
+.MuiTabs-indicator {
+  display: none;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.under-display-none {
+  text-decoration: none;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.bottom-line-small {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: solid 1px #f5f5f5;
+}
+
+.bottom-line {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  border: solid 1px #f5f5f5;
+}
+
+.col-1 {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}

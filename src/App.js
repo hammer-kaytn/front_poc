@@ -1,104 +1,16 @@
 import React, { Component } from "react";
-import caver from "./klaytn/caver";
-import WalletInfo from "./components/WalletInfo";
-import Staking from "./components/Staking";
-import Sending from "./components/send";
-import TxList from "./components/TxLists";
-import * as config from "./config";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Header from "./components/Header";
+import "./App.scss";
 
-const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      account: "",
-      balance: 0,
-    };
-  }
-
-  componentDidMount() {
-    this.loadAccountInfo();
-    this.setNetworkInfo();
-  }
-
-  loadAccountInfo = async () => {
-    const { klaytn } = window;
-
-    if (klaytn) {
-      try {
-        await klaytn.enable();
-        this.setAccountInfo(klaytn);
-        klaytn.on("accountsChanged", () => this.setAccountInfo(klaytn));
-      } catch (error) {
-        console.log("User denied account access");
-      }
-    } else {
-      console.log(
-        "Non-Kaikas browser detected. You should consider trying Kaikas!"
-      );
-    }
-  };
-
-  setAccountInfo = async () => {
-    const { klaytn } = window;
-    if (klaytn === undefined) return;
-    await new Promise((resolve, reject) => setTimeout(resolve, 500));
-    const account = klaytn.selectedAddress;
-    const balance = await caver.klay.getBalance(account);
-    const kip7 = new caver.kct.kip7(DEPLOYED_ADDRESS);
-    const name = await kip7.name();
-    const symbol = await kip7.symbol();
-    const decimals = await kip7.decimals();
-    const totalSupply = await kip7.totalSupply();
-    const tokenBalance = await kip7.balanceOf(account);
-
-    this.setState({
-      account,
-      balance: caver.utils.fromPeb(balance, "KLAY"),
-      name,
-      symbol,
-      totalSupply: caver.utils.fromPeb(totalSupply, "KLAY"),
-      tokenBalance: caver.utils.fromPeb(tokenBalance, "KLAY"),
-    });
-  };
-
-  setNetworkInfo = () => {
-    const { klaytn } = window;
-    if (klaytn === undefined) return;
-
-    this.setState({ network: klaytn.networkVersion });
-    klaytn.on("networkChanged", () =>
-      this.setNetworkInfo(klaytn.networkVersion)
-    );
-  };
-
-  render() {
-    const {
-      account,
-      balance,
-      tokenBalance,
-      name,
-      symbol,
-      totalSupply,
-    } = this.state;
-
-    return (
-      <div className="MainPage">
-        <WalletInfo
-          address={account}
-          balance={balance}
-          tbalance={tokenBalance}
-          name={name}
-          symbol={symbol}
-          totalSupply={totalSupply}
-        />
-        {account.length > 0 && <Sending />}
-        {account.length > 0 && <Staking />}
-        {account.length > 0 && <TxList address={account} />}
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div>
+      <Router>
+        <Header />
+      </Router>
+    </div>
+  );
+};
 
 export default App;

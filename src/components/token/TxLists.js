@@ -10,7 +10,7 @@ export default function TableList() {
 
   const fetchTxlists = async () => {
     try {
-      // 요청이 시작 할 때에는 error 와 Docters 를 초기화하고
+      // 요청이 시작 할 때에는 error 초기화하고
       setError(null);
       setTxlists(null);
       // loading 상태를 true 로 바꿉니다.
@@ -41,13 +41,13 @@ export default function TableList() {
               <b>TX HASH</b>
             </th>
             <th>
-              <b>FROM</b>
+              <b>보낸주소</b>
             </th>
             <th>
-              <b>TO</b>
+              <b>받은주소</b>
             </th>
             <th>
-              <b>VALUE</b>
+              <b>토큰수량</b>
             </th>
           </tr>
         </thead>
@@ -55,7 +55,10 @@ export default function TableList() {
           {txlists.map((txList) => (
             <tr key={txList.id}>
               <th component="th" scope="row">
-                <a href="https://baobab.scope.klaytn.com/tx/<%={txList.transactionHash}%>?tabId=kctTransfer">
+                <a
+                  href={`https://baobab.scope.klaytn.com/tx/${txList.transactionHash}?tabId=kctTransfer`}
+                  target="_blank"
+                >
                   {txList.transactionHash.substring(0, 10)}...
                 </a>
               </th>
