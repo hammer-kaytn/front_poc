@@ -18,7 +18,7 @@ const Sidebar = ({ address, balance, tokenBalance, tokenSymbol }) => {
       <div className="line"></div>
       <Link to="/mypage/mysns">SNS 계정 연결</Link>
       <div className="line"></div>
-      <Link to="/mypage/mymission">내 참여 현황</Link>
+      <Link to="/mypage/mymission">내 미션 현황</Link>
       <div className="line"></div>
       <Link to="/mypage/token">토큰 관리</Link>
     </div>

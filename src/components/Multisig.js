@@ -56,9 +56,9 @@ class Multisig extends Component {
   };
 
   confirmTransaction = () => {
-    const { from, value, gas, txID } = this.state;
+    const { from, gas, txID } = this.state;
 
-    const amount = caver.utils.toPeb(value, "KLAY");
+    //const amount = caver.utils.toPeb(value, "KLAY");
     this.stakingContract.methods
       .confirmTransaction(txID)
       .send({

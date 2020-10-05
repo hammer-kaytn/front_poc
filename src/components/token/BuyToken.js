@@ -2,8 +2,15 @@ import React, { Component } from "react";
 import caver from "../../klaytn/caver";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import Token from "./Token";
 
 import * as config from "../../config";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
@@ -39,7 +46,7 @@ class BuyToken extends Component {
   BuyTokenTransaction = () => {
     const { from, value, gas } = this.state;
     this.stakingContract.methods
-      .Staking()
+      .staking()
       .send({
         from,
         gas,
@@ -61,7 +68,7 @@ class BuyToken extends Component {
   };
 
   render() {
-    const { from, value } = this.state;
+    const { value } = this.state;
     return (
       <div>
         <Form>

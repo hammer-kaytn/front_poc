@@ -4,211 +4,208 @@ import "caver-js/packages/caver-kct/src/contract/token/KIP7/KIP7.sol";
 import "caver-js/packages/caver-kct/src/contract/token/KIP7/KIP7Metadata.sol";
 import "caver-js/packages/caver-kct/src/contract/token/KIP7/KIP7Pausable.sol";
 
-contract HeartLink is KIP7,KIP7Metadata,KIP7Pausable{
-    address[] public owners;
-    uint256 private _totalSupply;
-    uint256 public transactionCount;
-    uint256 public required;
-    
-    mapping (address => uint256) private _balances;
-    mapping (address => bool) public isOwner;
-    mapping (uint => Transaction) public transactions;
-    mapping (uint => mapping (address => bool)) public confirmations;
-    
-    
-    event CoinDeposit(address indexed _from, uint256 _value); 
-    event SwapRequest(address indexed _from, uint256 _value);    
-    event Confirmation(address indexed sender, uint indexed transactionId);
-    event Execution(uint indexed transactionId);
-    event ExecutionFailure(uint indexed transactionId);
-    event Submission(uint indexed transactionId);
-    event Deposit(address indexed sender, uint value);
-    
-    struct Transaction {
-        address destination;
-        uint value;
-        bytes data;
-        bool executed;
+// 멀티시그니처 계획중
+contract HeartLink is KIP7, KIP7Metadata, KIP7Pausable {
+    // --------------------------------------~!~!~! STORAGE ~!~!~!~----------------------------------------------
+
+    address public owner; // 첫 배포자.
+    uint256 missionsId = 0; // 광고 식별의 초기 카운트. 필히 storage 데이터로 남길필요가 있다.
+
+    mapping(uint256 => Mission) public missions; //광고등록이 덮어씌어지지 않도록 uint id로 맵핑
+
+    //블록체인의 담을 광고의 데이터 구조체.
+    struct Mission {
+        uint256 id; //미션의 식별자
+        address[] likedUsers; //좋아요를 누른사람들의 지갑 주소
+        address advertiser; //미션을 생성한 광고주의 주소
+        uint256 likingGoal; //미션을 완료하기 위한 목표 좋아요
+        uint256 likingNow; //현재 좋아요.
+        uint256 deadline; //미션 기간 데드라인
+        uint256 totalReword; //미션에 걸려있는 총 보상
+        bool closed; //미션 달성시
     }
-    
-    modifier ownerExists(address owner) {
-        require(isOwner[owner]);
+
+    // --------------------------------------~!~!~! EVENT ~!~!~!~----------------------------------------------
+
+    //스테이킹을 했을때 보낸사람, 클레이의 양을 이벤트 호출
+    event CoinDeposit(address indexed _from, uint256 _value);
+
+    //언스테이킹을 했을때 보낸사람, 토큰의 양을 이벤트 호출
+    event SwapRequest(address indexed _from, uint256 _value);
+
+    //광고를 만들었을때 미션식별과 광고주 주소, 목표 좋아요, 유효기간, 총보상량을 이벤트 호출
+    event GeneratedMission(
+        uint256 indexed _id,
+        address indexed _advertiser,
+        uint256 _likingGoal,
+        uint256 _deadline,
+        uint256 _totalReword
+    );
+
+    //좋아요를 눌렀을때 미션식별과 누른사람의 address 를 이벤트 호출
+    event LikeMission(uint256 indexed _id, address indexed _user);
+
+    //광고 미션을 완료하고 보상을 했을때 광고 식별 아이디와 광고주,총 보상량 이벤트 호출
+    event RewordMission(
+        uint256 indexed _id,
+        address indexed _advertiser,
+        uint256 indexed _totalReword
+    );
+
+    // ----------------------------------------------~!~!~ MODIFIER ~!~!~!-------------------------------------
+
+    //owner 만 제어할수 있도록 하는 modifier 함수.
+    modifier onlyOwner() {
+        require(msg.sender == owner);
         _;
     }
-    
-     modifier transactionExists(uint transactionId) {
-        require(transactions[transactionId].destination != address(0));
-        _;
+
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint8 decimals
+    ) public KIP7Metadata(name, symbol, decimals) {
+        owner = msg.sender;
     }
-    
-    modifier notExecuted(uint transactionId) {
-        require(!transactions[transactionId].executed);
-        _;
+
+    //  ----------------------------------------------~!@~!@~ Advertise ~~!@~!@~--------------------------------------------
+
+    // @dev 광고의 보상이 완료된 상태인지 확인하는 함수
+    // @params _missionId 광고주가 등록한 미션 식별 아이디.
+    function _checkClosed(uint256 _missionId) private view returns (bool) {
+        if (!missions[_missionId].closed) {
+            return true;
+        }
+        return false;
     }
-    
-    modifier notConfirmed(uint transactionId, address owner) {
-        require(!confirmations[transactionId][owner]);
-        _;
+
+    // @dev 좋아요를 눌렀을때 광고의 기간이 지나있는지 확인하는 함수 require
+    function _checkTimeOut(uint256 _missionId) private view returns (bool) {
+        if (missions[_missionId].deadline != now) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
-    modifier confirmed(uint transactionId, address owner) {
-        require(confirmations[transactionId][owner]);
-        _;
-    }
-    
-    modifier notNull(address _address) {
-        require(_address != address(0));
-        _;
-    }
-    
-    function()
-        external payable
-    {
-        if (msg.value > 0)
-            emit Deposit(msg.sender, msg.value);
-    }
-    
-    constructor(address[] memory _owners, uint _required, string memory name, string memory symbol, uint8 decimals) KIP7Metadata(name, symbol, decimals) public { 
-        for (uint i=0; i<_owners.length; i++) {
-                require(!isOwner[_owners[i]] && _owners[i] != address(0));
-                isOwner[_owners[i]] = true;
-            }
-            owners = _owners;
-            required = _required;
-    }
-    
-    // @dev스테이킹 기능, 스테이킹시 같은 갯수의 토큰을 반환
-    function Staking() public payable {
-        _balances[msg.sender] += _balances[msg.sender].add(msg.value);
-        _totalSupply = _totalSupply.add(msg.value); 
-        _mint(msg.sender,msg.value);
-        emit CoinDeposit(msg.sender, msg.value);
-    }
-    
-    // @dev 언스테이킹 기능
-    // @params amount 언스테이킹할 수량
-    function Unstaking(uint256 amount) public returns (bool) {
-        require(amount <= _balances[msg.sender]);
-        _balances[msg.sender] = _balances[msg.sender].sub(amount);
-        _burn(msg.sender,amount);
-        msg.sender.transfer(amount);
-        emit SwapRequest(msg.sender,amount);
+
+    // @dev 좋아요를 눌렀을때 배열안에 이미 있다면 require로 걸러는 함수
+    function _testLiked(uint256 _missionId) private view returns (bool) {
+        for (uint256 i = 0; i < missions[_missionId].likedUsers.length; ++i) {
+            if (missions[_missionId].likedUsers[i] == msg.sender) return false;
+        }
         return true;
     }
-    
-    // @ dev스테이커에게 클레이 전송하는 기능. 이 기능은 오로지 컨트렉트의 주인만이 할수있다.
-    // @ params _to 받는사람주소
-    // @ params amount 보내는 수량
-    // function TransferToStaker(address payable _to, uint256 amount) onlyOwner public {
-    //     _to.transfer(amount);
-    // }
-    
-    //------------------------- Multisig ---------------------------------------
-    
-    /// @dev Allows an owner to submit and confirm a transaction.
-    /// @param destination Transaction target address.
-    /// @param value Transaction ether value.
-    /// @param data Transaction data payload.
-    /// @return Returns transaction ID.
-    function submitTransaction(address destination, uint value, bytes memory data)
-        public
-        returns (uint transactionId)
-    {
-        require(isOwner[msg.sender]);
-        transactionId = addTransaction(destination, value, data);
-        confirmTransaction(transactionId);
+
+    // @dev 광고를 등록하는 기능.
+    // @params _likingGoal 목표 좋아요.
+    // @params _totalReword 총 보상 지급량.
+    function createAdvertise(uint256 _likingGoal, uint256 _totalReword) public {
+        address[] memory likedUsers;
+        missions[missionsId] = Mission(
+            missionsId,
+            likedUsers,
+            msg.sender,
+            _likingGoal,
+            0,
+            getDeadline(now),
+            _totalReword,
+            false
+        );
+        Mission memory mission = missions[missionsId];
+        _transfer(msg.sender, address(this), _totalReword);
+        missionsId++;
+        emit GeneratedMission(
+            missionsId,
+            msg.sender,
+            mission.likingGoal,
+            getDeadline(now),
+            mission.totalReword
+        );
     }
-    
-    /// @dev Allows an owner to confirm a transaction.
-    /// @param transactionId Transaction ID.
-    function confirmTransaction(uint transactionId)
-        public
-        ownerExists(msg.sender)
-        transactionExists(transactionId)
-        notConfirmed(transactionId, msg.sender)
-    {
-        confirmations[transactionId][msg.sender] = true;
-        emit Confirmation(msg.sender, transactionId);
-        executeTransaction(transactionId);
+
+    // @dev 광고 "좋아요"를 누르는 기능
+    // @parmas _missionId 광고주가 등록한 미션 식별 아이디.
+    function likeMission(uint256 _missionId) public {
+        require(_checkTimeOut(_missionId), "기간이 만료된 광고 입니다.");
+        require(_testLiked(_missionId), "이미 등록되어 있는 어드레스입니다");
+        missions[_missionId].likedUsers.push(msg.sender);
+        missions[_missionId].likingNow += 1;
+        emit LikeMission(_missionId, msg.sender);
     }
-    
-    /// @dev Allows anyone to execute a confirmed transaction.
-    /// @param transactionId Transaction ID.
-    function executeTransaction(uint transactionId)
-        public
-        ownerExists(msg.sender)
-        confirmed(transactionId, msg.sender)
-        notExecuted(transactionId)
-    {
-        if (isConfirmed(transactionId)) {
-            Transaction storage txn = transactions[transactionId];
-            txn.executed = true;
-            if (external_call(txn.destination, txn.value, txn.data.length, txn.data))
-                emit Execution(transactionId);
-            else {
-                emit ExecutionFailure(transactionId);
-                txn.executed = false;
-            }
+
+    // @dev 광고의 좋아요를 눌러준 사람들에게 보상을 주는 기능
+    // @params _missionId 조회하고 싶은 광고 미션의 식별 아이디
+    function rewordMission(uint256 _missionId) public onlyOwner {
+        require(_checkClosed(_missionId), "이미 보상이 완료된 광고입니다");
+        uint256 ratioReword = missions[_missionId].totalReword /
+            missions[_missionId].likedUsers.length;
+        for (uint256 i = 0; i < missions[_missionId].likedUsers.length; i++) {
+            _transfer(
+                address(this),
+                missions[_missionId].likedUsers[i],
+                ratioReword
+            );
         }
+        missions[_missionId].closed = true;
+        emit RewordMission(
+            _missionId,
+            missions[_missionId].advertiser,
+            missions[_missionId].totalReword
+        );
     }
-    
-    /// @dev Returns the confirmation status of a transaction.
-    /// @param transactionId Transaction ID.
-    /// @return Confirmation status.
-    function isConfirmed(uint transactionId)
+
+    // @dev 등록한 광고의 정보(배열안에 지갑주소들)를 볼수있는 콜 데이터(테스트용)
+    // @params _missionId 조회하고 싶은 광고미션의 식별 아이디
+    // @return 목표좋아요, 좋아요눌러준 사람들, 기간, 총 보상량, 현재 좋아요
+    function getMission(uint256 _missionId)
         public
         view
-        returns (bool)
+        returns (
+            uint256,
+            address[] memory,
+            uint256,
+            uint256,
+            uint256
+        )
     {
-        uint count = 0;
-        for (uint i=0; i<owners.length; i++) {
-            if (confirmations[transactionId][owners[i]])
-                count += 1;
-            if (count == required)
-                return true;
-        }
+        Mission memory mission = missions[_missionId];
+        return (
+            mission.likingGoal,
+            mission.likedUsers,
+            mission.deadline,
+            mission.totalReword,
+            mission.likingNow
+        );
     }
-    
-    /// @dev Adds a new transaction to the transaction mapping, if transaction does not exist yet.
-    /// @param destination Transaction target address.
-    /// @param value Transaction ether value.
-    /// @param data Transaction data payload.
-    /// @return Returns transaction ID.
-    function addTransaction(address destination, uint value, bytes memory data)
-        internal
-        notNull(destination)
-        returns (uint transactionId)
+
+    // @dev 기간을 설정기능.
+    // @params _now 현재 시간.
+    // @return 현재 시간 + 30일
+    function getDeadline(uint256 _now) public pure returns (uint256) {
+        return _now + 30 days; //(3600 * 24 * 30)
+    }
+
+    // ----------------------------------- ~!~!~!  STAKING ~!~!~!~ ----------------------------------------------
+
+    // @dev 스테이킹 기능, 스테이킹시 같은 갯수의 토큰을 반환
+    function staking() public payable {
+        _mint(msg.sender, msg.value);
+        emit CoinDeposit(msg.sender, msg.value);
+    }
+
+    // @dev 언스테이킹 기능,
+    // @params amount 반환할 토큰의 양
+    function unstaking(uint256 amount) public {
+        _burn(msg.sender, amount);
+        msg.sender.transfer(amount);
+        emit SwapRequest(msg.sender, amount);
+    }
+
+    // @dev 스테이커에게 전송하는 기능. 이 기능은 오로지 컨트렉트의 주인만이 할수있다.
+    function transferToStaker(address payable _to, uint256 amount)
+        public
+        onlyOwner
     {
-        transactionId = transactionCount;
-        transactions[transactionId] = Transaction({
-            destination: destination,
-            value: value,
-            data: data,
-            executed: false
-        });
-        transactionCount += 1;
-        emit Submission(transactionId);
-    }
-    
-    // call has been separated into its own function in order to take advantage
-    // of the Solidity's code generator to produce a loop that copies tx.data into memory.
-    function external_call(address destination, uint value, uint dataLength, bytes memory data) internal returns (bool) {
-        bool result;
-        assembly {
-            let x := mload(0x40)   // "Allocate" memory for output (0x40 is where "free memory" pointer is stored by convention)
-            let d := add(data, 32) // First 32 bytes are the padded length of data, so exclude that
-            result := call(
-                sub(gas, 34710),   // 34710 is the value that solidity is currently emitting
-                                   // It includes callGas (700) + callVeryLow (3, to pay for SUB) + callValueTransferGas (9000) +
-                                   // callNewAccountGas (25000, in case the destination address does not exist and needs creating)
-                destination,
-                value,
-                d,
-                dataLength,        // Size of the input (in bytes) - this is what fixes the padding problem
-                x,
-                0                  // Output is ignored, therefore the output size is zero
-            )
-        }
-        return result;
+        _to.transfer(amount);
     }
 }

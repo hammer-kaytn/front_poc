@@ -41,7 +41,7 @@ class ChangeToken extends Component {
 
     const amount = caver.utils.toPeb(value, "KLAY");
     this.stakingContract.methods
-      .Unstaking(amount)
+      .unstaking(amount)
       .send({
         from,
         gas,
@@ -62,7 +62,7 @@ class ChangeToken extends Component {
   };
 
   render() {
-    const { from, value } = this.state;
+    const { value } = this.state;
     return (
       <div>
         <Form>
