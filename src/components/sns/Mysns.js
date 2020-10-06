@@ -24,8 +24,8 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
       snsAccount: snsAccount,
     };
     axios.post("http://localhost:5000/api/accounts", obj).then(
-      (res) => console.log(res.data),
-      <Redirect to="/mypage/mysns" />
+      (res) => console.log(res.data)
+      //<Redirect to="/participate" />
       //document.location.href = "/mypage/mysns/";
     );
     //e.preventDefault();
@@ -37,9 +37,9 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
       snsAccount: snsAccount,
     };
     axios.post("http://localhost:5000/api/accounts/update", obj).then(
-      (res) => console.log(res.data),
+      (res) => console.log(res.data)
 
-      <Redirect to="/participate" />
+      //<Redirect to="/participate" />
     );
     //e.preventDefault();
   });
@@ -55,7 +55,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
         `http://localhost:5000/api/accounts/${address}`
       );
       setAccounts(response.data);
-      console.log(accounts);
+      // console.log(accounts);
     } catch (e) {
       setError(e);
     }
@@ -64,7 +64,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
 
   useEffect(() => {
     fetchAccounts();
-  }, []);
+  }, [address]);
 
   if (loading) return <div>로딩중..</div>;
   if (error)

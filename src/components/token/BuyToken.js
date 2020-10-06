@@ -56,11 +56,15 @@ class BuyToken extends Component {
         console.log("txHash", transactionHash);
         this.setState({ txHash: transactionHash });
       })
-      .on("receipt", (receipt) => {
-        console.log("receipt", receipt);
-        this.setState({ receipt: JSON.stringify(receipt) });
-        document.location.href = "/mypage/token/";
-      })
+      .on(
+        "receipt",
+        (receipt) => (
+          console.log("receipt", receipt),
+          this.setState({ receipt: JSON.stringify(receipt) }),
+          (document.location.href = "/mypage/mysns")
+          // <Redirect to="/result" />
+        )
+      )
       .on("error", (error) => {
         console.log("error", error);
         this.setState({ error: error.message });

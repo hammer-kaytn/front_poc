@@ -17,6 +17,7 @@ import Participate from "./Participate";
 import Register from "./Register";
 import Mymission from "./mission/Mymission";
 import Mysns from "./sns/Mysns";
+
 import Switch from "react-bootstrap/esm/Switch";
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
@@ -169,6 +170,7 @@ class App extends Component {
                 />
               )}
             />
+
             {/* <Redirect path="*" to="/" /> */}
           </Switch>
         </Router>
