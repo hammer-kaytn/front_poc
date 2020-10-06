@@ -1,12 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Sidebar from "../Sidebar";
-import TransferToken from "./TransferToken";
-import ChangeToken from "./ChangeToken";
-import BuyToken from "./BuyToken";
-import TxLists from "./TxLists";
 
-const Token = ({ address, balance, tokenSymbol, tokenBalance }) => {
+const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
   return (
     <div>
       <Container>
@@ -20,10 +16,9 @@ const Token = ({ address, balance, tokenSymbol, tokenBalance }) => {
             />
           </Col>
           <Col xs={12} sm={8} md={10}>
-            <TransferToken address={address} />
-            <ChangeToken address={address} />
-            <BuyToken address={address} />
-            <TxLists address={address} />
+            <p className="font-bold-700 font-1H padding-top-1e font-color-lightgray">
+              내 미션 현황
+            </p>
           </Col>
         </Row>
       </Container>
@@ -31,4 +26,4 @@ const Token = ({ address, balance, tokenSymbol, tokenBalance }) => {
   );
 };
 
-export default Token;
+export default Mymission;

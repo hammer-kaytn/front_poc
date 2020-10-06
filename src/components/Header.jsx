@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import caver from "../klaytn/caver";
 import Home from "./Home";
 import Token from "./token/Token";
@@ -135,7 +130,9 @@ class App extends Component {
             />
             <Route
               path="/register"
-              render={() => <Register address={account} />}
+              render={() => (
+                <Register address={account} tokenBalance={tokenBalance} />
+              )}
             />
             <Route
               path="/mypage/mysns"

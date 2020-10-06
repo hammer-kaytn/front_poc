@@ -1,15 +1,14 @@
-.button {
-  background-color: #abb0ea;
-  border: none;
-  color: white;
-  padding: 15px 32px;
+.snsbutton {
   width: 250px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  background-color: #abb0ea;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.button:hover {
+.snsbutton:hover {
   background-color: #7f87e0;
 }

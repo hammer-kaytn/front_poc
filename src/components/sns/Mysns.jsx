@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Sidebar from "../Sidebar";
-import { Link, Redirect } from "react-router-dom";
-
 import "./Mysns.scss";
 
 const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
@@ -14,11 +12,11 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
 
   const [snsAccount, setSnsaccount] = useState("");
 
-  const onChange = useCallback((e) => {
+  const onChange = (e) => {
     setSnsaccount(e.target.value);
-  });
+  };
 
-  const onSubmit = useCallback((e) => {
+  const onSubmit = (e) => {
     const obj = {
       account: setAddress.address,
       snsAccount: snsAccount,
@@ -29,9 +27,9 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
       //document.location.href = "/mypage/mysns/";
     );
     //e.preventDefault();
-  });
+  };
 
-  const onModify = useCallback((e) => {
+  const onModify = (e) => {
     const obj = {
       account: setAddress.address,
       snsAccount: snsAccount,
@@ -42,7 +40,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
       //<Redirect to="/participate" />
     );
     //e.preventDefault();
-  });
+  };
 
   const fetchAccounts = async () => {
     try {
@@ -97,7 +95,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
                   ></input>
                 </div>
                 <div className="align-center">
-                  <button className="button" type="submit">
+                  <button className="snsbutton" type="submit">
                     연결
                   </button>
                 </div>
@@ -138,7 +136,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
                 ></input>
               </div>
               <div className="align-center">
-                <button className="button" type="submit">
+                <button className="snsbutton" type="submit">
                   수정
                 </button>
               </div>

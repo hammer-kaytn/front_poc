@@ -1,4 +1,3 @@
-input[type="text"],
 select {
   width: 100%;
   padding: 12px 20px;
@@ -8,9 +7,7 @@ select {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
-input[type="number"],
-select {
+.input-text {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -20,7 +17,28 @@ select {
   box-sizing: border-box;
 }
 
-input[type="submit"] {
+.number {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+// .input[type="number"],
+// .select {
+//   width: 100%;
+//   padding: 12px 20px;
+//   margin: 8px 0;
+//   display: inline-block;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   box-sizing: border-box;
+// }
+
+.regbutton {
   width: 100%;
   background-color: #abb0ea;
   color: white;
@@ -31,7 +49,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
+.regbutton:hover {
   background-color: #7f87e0;
 }
 
