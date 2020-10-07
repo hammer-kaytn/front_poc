@@ -12,6 +12,7 @@ import Participate from "./Participate";
 import Register from "./Register";
 import Mymission from "./mission/Mymission";
 import Mysns from "./sns/Mysns";
+import Test from "./Test";
 
 import Switch from "react-bootstrap/esm/Switch";
 
@@ -167,6 +168,8 @@ class App extends Component {
                 />
               )}
             />
+            {/* 테스트용 페이지 라우터 */}
+            <Route path="/test" render={() => <Test address={account} />} />
 
             {/* <Redirect path="*" to="/" /> */}
           </Switch>

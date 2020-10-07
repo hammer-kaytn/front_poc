@@ -1,176 +1,73 @@
-export const DEPLOYED_ADDRESS = "0x35d1498642B5A6c2701cF78541F2cB31B069986f";
+export const DEPLOYED_ADDRESS = "0xfB85FAedb14623d72C16e109C2C4935c97Af4eeB";
 export const DEPLOYED_ABI = [
   {
-    constant: true,
-    inputs: [{ name: "interfaceId", type: "bytes4" }],
-    name: "supportsInterface",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x01ffc9a7",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "name",
-    outputs: [{ name: "", type: "string" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x06fdde03",
-  },
-  {
     constant: false,
     inputs: [
-      { name: "spender", type: "address" },
-      { name: "value", type: "uint256" },
+      {
+        name: "account",
+        type: "address",
+      },
     ],
-    name: "approve",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x095ea7b3",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "totalSupply",
-    outputs: [{ name: "", type: "uint256" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x18160ddd",
-  },
-  {
-    constant: false,
-    inputs: [
-      { name: "from", type: "address" },
-      { name: "to", type: "address" },
-      { name: "value", type: "uint256" },
-    ],
-    name: "transferFrom",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x23b872dd",
-  },
-  {
-    constant: true,
-    inputs: [{ name: "", type: "uint256" }],
-    name: "missions",
-    outputs: [
-      { name: "id", type: "uint256" },
-      { name: "advertiser", type: "address" },
-      { name: "likingGoal", type: "uint256" },
-      { name: "likingNow", type: "uint256" },
-      { name: "deadline", type: "uint256" },
-      { name: "totalReword", type: "uint256" },
-      { name: "closed", type: "bool" },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x2c8fe526",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "decimals",
-    outputs: [{ name: "", type: "uint8" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x313ce567",
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: "unpause",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x3f4ba83a",
-  },
-  {
-    constant: false,
-    inputs: [
-      { name: "recipient", type: "address" },
-      { name: "amount", type: "uint256" },
-    ],
-    name: "safeTransfer",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x423f6cef",
-  },
-  {
-    constant: false,
-    inputs: [
-      { name: "sender", type: "address" },
-      { name: "recipient", type: "address" },
-      { name: "amount", type: "uint256" },
-    ],
-    name: "safeTransferFrom",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x42842e0e",
-  },
-  {
-    constant: true,
-    inputs: [{ name: "account", type: "address" }],
-    name: "isPauser",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x46fbf68e",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "paused",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x5c975abb",
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: "renouncePauser",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x6ef8d66d",
-  },
-  {
-    constant: true,
-    inputs: [{ name: "account", type: "address" }],
-    name: "balanceOf",
-    outputs: [{ name: "", type: "uint256" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x70a08231",
-  },
-  {
-    constant: false,
-    inputs: [{ name: "account", type: "address" }],
     name: "addPauser",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0x82dc1ec4",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "spender",
+        type: "address",
+      },
+      {
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "approve",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_likingGoal",
+        type: "uint256",
+      },
+      {
+        name: "_totalReword",
+        type: "uint256",
+      },
+    ],
+    name: "createAdvertise",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_missionId",
+        type: "uint256",
+      },
+    ],
+    name: "likeMission",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     constant: false,
@@ -180,267 +77,117 @@ export const DEPLOYED_ABI = [
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0x8456cb59",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "owner",
-    outputs: [{ name: "", type: "address" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x8da5cb5b",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "symbol",
-    outputs: [{ name: "", type: "string" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x95d89b41",
   },
   {
     constant: false,
-    inputs: [
-      { name: "to", type: "address" },
-      { name: "value", type: "uint256" },
-    ],
-    name: "transfer",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0xa9059cbb",
-  },
-  {
-    constant: false,
-    inputs: [
-      { name: "sender", type: "address" },
-      { name: "recipient", type: "address" },
-      { name: "amount", type: "uint256" },
-      { name: "data", type: "bytes" },
-    ],
-    name: "safeTransferFrom",
+    inputs: [],
+    name: "renouncePauser",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0xb88d4fde",
-  },
-  {
-    constant: true,
-    inputs: [
-      { name: "owner", type: "address" },
-      { name: "spender", type: "address" },
-    ],
-    name: "allowance",
-    outputs: [{ name: "", type: "uint256" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0xdd62ed3e",
   },
   {
     constant: false,
     inputs: [
-      { name: "recipient", type: "address" },
-      { name: "amount", type: "uint256" },
-      { name: "data", type: "bytes" },
+      {
+        name: "_missionId",
+        type: "uint256",
+      },
+    ],
+    name: "rewordMission",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
     ],
     name: "safeTransfer",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0xeb795549",
-  },
-  {
-    inputs: [
-      { name: "name", type: "string" },
-      { name: "symbol", type: "string" },
-      { name: "decimals", type: "uint8" },
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor",
-    signature: "constructor",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "_from", type: "address" },
-      { indexed: false, name: "_value", type: "uint256" },
-    ],
-    name: "CoinDeposit",
-    type: "event",
-    signature:
-      "0x3cf246d605a449bc406d5757155cf6a2db2aa82bc7a75a1a0b1906b332959007",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "_from", type: "address" },
-      { indexed: false, name: "_value", type: "uint256" },
-    ],
-    name: "SwapRequest",
-    type: "event",
-    signature:
-      "0xc6028b427fa55e47477f154025363ebe9b6b8cf69e982fc339c40e1415cd383c",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "_id", type: "uint256" },
-      { indexed: true, name: "_advertiser", type: "address" },
-      { indexed: false, name: "_likingGoal", type: "uint256" },
-      { indexed: false, name: "_deadline", type: "uint256" },
-      { indexed: false, name: "_totalReword", type: "uint256" },
-    ],
-    name: "GeneratedMission",
-    type: "event",
-    signature:
-      "0x79b77db33efbc08cbda7198344e888674054760942e6ea846d812ea70a805485",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "_id", type: "uint256" },
-      { indexed: true, name: "_user", type: "address" },
-    ],
-    name: "LikeMission",
-    type: "event",
-    signature:
-      "0x8a14629946e1bdbfefefc0d871e088c6ced8d1ffc7937ab1398d0799186ca87a",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "_id", type: "uint256" },
-      { indexed: true, name: "_advertiser", type: "address" },
-      { indexed: true, name: "_totalReword", type: "uint256" },
-    ],
-    name: "RewordMission",
-    type: "event",
-    signature:
-      "0xe5d10e73506cac78e920f49d4702146366df5b245a98063d60beb0675d45a3ef",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: false, name: "account", type: "address" }],
-    name: "Paused",
-    type: "event",
-    signature:
-      "0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: false, name: "account", type: "address" }],
-    name: "Unpaused",
-    type: "event",
-    signature:
-      "0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: true, name: "account", type: "address" }],
-    name: "PauserAdded",
-    type: "event",
-    signature:
-      "0x6719d08c1888103bea251a4ed56406bd0c3e69723c8a1686e017e7bbe159b6f8",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: true, name: "account", type: "address" }],
-    name: "PauserRemoved",
-    type: "event",
-    signature:
-      "0xcd265ebaf09df2871cc7bd4133404a235ba12eff2041bb89d9c714a2621c7c7e",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "from", type: "address" },
-      { indexed: true, name: "to", type: "address" },
-      { indexed: false, name: "value", type: "uint256" },
-    ],
-    name: "Transfer",
-    type: "event",
-    signature:
-      "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, name: "owner", type: "address" },
-      { indexed: true, name: "spender", type: "address" },
-      { indexed: false, name: "value", type: "uint256" },
-    ],
-    name: "Approval",
-    type: "event",
-    signature:
-      "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
   },
   {
     constant: false,
     inputs: [
-      { name: "_likingGoal", type: "uint256" },
-      { name: "_totalReword", type: "uint256" },
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        name: "data",
+        type: "bytes",
+      },
     ],
-    name: "createAdvertise",
+    name: "safeTransfer",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0x22133cea",
   },
   {
     constant: false,
-    inputs: [{ name: "_missionId", type: "uint256" }],
-    name: "likeMission",
+    inputs: [
+      {
+        name: "sender",
+        type: "address",
+      },
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "safeTransferFrom",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0x47b8afe5",
   },
   {
     constant: false,
-    inputs: [{ name: "_missionId", type: "uint256" }],
-    name: "rewordMission",
+    inputs: [
+      {
+        name: "sender",
+        type: "address",
+      },
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "safeTransferFrom",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0x77e350c9",
-  },
-  {
-    constant: true,
-    inputs: [{ name: "_missionId", type: "uint256" }],
-    name: "getMission",
-    outputs: [
-      { name: "", type: "uint256" },
-      { name: "", type: "address[]" },
-      { name: "", type: "uint256" },
-      { name: "", type: "uint256" },
-      { name: "", type: "uint256" },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0xeb2b94b5",
-  },
-  {
-    constant: true,
-    inputs: [{ name: "_now", type: "uint256" }],
-    name: "getDeadline",
-    outputs: [{ name: "", type: "uint256" }],
-    payable: false,
-    stateMutability: "pure",
-    type: "function",
-    signature: "0x82862275",
   },
   {
     constant: false,
@@ -450,29 +197,573 @@ export const DEPLOYED_ABI = [
     payable: true,
     stateMutability: "payable",
     type: "function",
-    signature: "0x4cf088d9",
-  },
-  {
-    constant: false,
-    inputs: [{ name: "amount", type: "uint256" }],
-    name: "unstaking",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x90827da7",
   },
   {
     constant: false,
     inputs: [
-      { name: "_to", type: "address" },
-      { name: "amount", type: "uint256" },
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "transfer",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "sender",
+        type: "address",
+      },
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "transferFrom",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_to",
+        type: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
     ],
     name: "transferToStaker",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",
-    signature: "0x209113f1",
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: "unpause",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "unstaking",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        name: "name",
+        type: "string",
+      },
+      {
+        name: "symbol",
+        type: "string",
+      },
+      {
+        name: "decimals",
+        type: "uint8",
+      },
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "_from",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "_value",
+        type: "uint256",
+      },
+    ],
+    name: "CoinDeposit",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "_from",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "_value",
+        type: "uint256",
+      },
+    ],
+    name: "SwapRequest",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        name: "_advertiser",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "_likingGoal",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        name: "_deadline",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        name: "_totalReword",
+        type: "uint256",
+      },
+    ],
+    name: "GeneratedMission",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        name: "_user",
+        type: "address",
+      },
+    ],
+    name: "LikeMission",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        name: "_advertiser",
+        type: "address",
+      },
+      {
+        indexed: true,
+        name: "_totalReword",
+        type: "uint256",
+      },
+    ],
+    name: "RewordMission",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "Paused",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "Unpaused",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "PauserAdded",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "PauserRemoved",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        name: "spender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Approval",
+    type: "event",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "owner",
+        type: "address",
+      },
+      {
+        name: "spender",
+        type: "address",
+      },
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "decimals",
+    outputs: [
+      {
+        name: "",
+        type: "uint8",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "_now",
+        type: "uint256",
+      },
+    ],
+    name: "getDeadline",
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "_missionId",
+        type: "uint256",
+      },
+    ],
+    name: "getMission",
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+      {
+        name: "",
+        type: "address[]",
+      },
+      {
+        name: "",
+        type: "uint256",
+      },
+      {
+        name: "",
+        type: "uint256",
+      },
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "isPauser",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "missions",
+    outputs: [
+      {
+        name: "id",
+        type: "uint256",
+      },
+      {
+        name: "advertiser",
+        type: "address",
+      },
+      {
+        name: "likingGoal",
+        type: "uint256",
+      },
+      {
+        name: "likingNow",
+        type: "uint256",
+      },
+      {
+        name: "deadline",
+        type: "uint256",
+      },
+      {
+        name: "totalReword",
+        type: "uint256",
+      },
+      {
+        name: "closed",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "name",
+    outputs: [
+      {
+        name: "",
+        type: "string",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        name: "",
+        type: "address",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "paused",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "interfaceId",
+        type: "bytes4",
+      },
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "symbol",
+    outputs: [
+      {
+        name: "",
+        type: "string",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "totalSupply",
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
   },
 ];

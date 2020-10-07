@@ -12,6 +12,8 @@ code {
     monospace;
 }
 
-#root {
-  max-width: 80em;
-}
+/* #root {
+  max-width: 160em;
+  display: flex;
+  justify-content: center;
+} */
