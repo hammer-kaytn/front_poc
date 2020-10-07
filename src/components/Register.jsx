@@ -6,6 +6,7 @@ import * as config from "../config";
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
+let missionId, deadline;
 
 const Register = ({ address, tokenBalance }) => {
   const axios = require("axios");
@@ -42,7 +43,7 @@ const Register = ({ address, tokenBalance }) => {
     setReward(e.target.value);
   };
 
-  const onRegister = (e) => {
+  const onRegister = async (e) => {
     const from = address;
     const token = tokenBalance;
     const amount = caver.utils.toPeb(reward, "KLAY");
@@ -62,37 +63,44 @@ const Register = ({ address, tokenBalance }) => {
         .on("transactionHash", (transactionHash) => {
           console.log("txHash", transactionHash);
         })
-        .on("receipt", (receipt) => {
-          console.log("receipt", receipt);
-        })
+        .on(
+          "receipt",
+          async (receipt) => (
+            console.log("receipt", receipt),
+            (missionId = await receipt.events.GeneratedMission.returnValues
+              ._id),
+            (deadline = await receipt.events.GeneratedMission.returnValues
+              ._deadline)
+          )
+        )
         .on("error", (error) => {
           console.log("error", error);
         })
-        .then(() => {
+        .then(async () => {
           alert("블록에 정보 저장을 성공하였습니다.");
-          onSubmit();
+          await onSubmit();
         });
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     const obj = {
-      category: category,
-      account: address,
-      page: page,
-      tag: tag,
-      goal: goal,
-      reward: reward,
+      category: await category,
+      account: await address,
+      page: await page,
+      tag: await tag,
+      goal: await goal,
+      reward: await reward,
+      missionId: await missionId,
+      deadline: await deadline,
     };
     console.log(obj);
 
-    axios
-      .post("http://localhost:5000/api/mission", obj)
-      .then(
-        (res) => console.log(res.data),
-        alert("데이터 베이스에 정상적으로 등록 되었습니다"),
-        (document.location.href = "/mypage/mymission/")
-      );
+    axios.post("http://localhost:5000/api/mission", obj).then(
+      (res) => console.log(res.data),
+      alert("데이터 베이스에 정상적으로 등록 되었습니다")
+      // (document.location.href = "/mypage/mymission/")
+    );
     //e.preventDefault();
   };
 
