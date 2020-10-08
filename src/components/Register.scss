@@ -1,13 +1,17 @@
 select {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 100px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 .input-text {
+  font-family: NotoSansCJKkr;
+  font-size: 14px;
+  text-align: left;
+  color: var(--maincolor);
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -27,6 +31,17 @@ select {
   box-sizing: border-box;
 }
 
+// .input[type="number"],
+// .select {
+//   width: 100%;
+//   padding: 12px 20px;
+//   margin: 8px 0;
+//   display: inline-block;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   box-sizing: border-box;
+// }
+
 .regbutton {
   width: 100%;
   background-color: #abb0ea;
@@ -43,7 +58,32 @@ select {
 }
 
 .register {
-  border-radius: 5px;
+  // border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+}
+
+.label-text {
+  font-family: NotoSansCJKkr;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: left;
+  color: #6a6767;
+}
+
+.input-text-placeholder {
+  font-family: NotoSansCJKkr;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 5.57;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--maincolor)
+}
+
+[className="input-text"]::-webkit-input-placeholder {
+  color: skyblue;
 }

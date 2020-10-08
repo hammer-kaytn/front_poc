@@ -6,6 +6,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  height: 6.8%;
   color: #abb0ea;
   background-color: white;
   font-weight: bold;
@@ -83,11 +84,14 @@ body {
   float: none;
   position: absolute;
   top: 50%;
+  bottom: 6.8%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .navbarCenter img {
+  width: 3.7%;
+  height: 98.6%;
   float: none;
   position: absolute;
   top: 0%;
@@ -97,6 +101,7 @@ body {
 
 .navbarRight {
   float: right;
+  margin-right: 19.3%;
 }
 
 /* Responsive navigation menu (for mobile devices) */
@@ -114,3 +119,14 @@ body {
     transform: none;
   }
 } */
+
+.navLink{
+  margin-left: 19.3%;
+  width: 32.4%;
+  height: 3%;
+  font-size: 16px;
+  text-align: center;
+  font-family: NotoSansCJKkr;
+  line-height: 2.25;
+  color: #506270;
+}

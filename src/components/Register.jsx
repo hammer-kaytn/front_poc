@@ -105,25 +105,27 @@ const Register = ({ address, tokenBalance }) => {
   };
 
   return (
-    <Container className="padding-top-4e">
-      <div className="register">
+    <Container>
+      <div className="register" style={{marginRight: '-18%', marginLeft: '-20%', marginTop:'19.3%'}}>
         {/* {gas ? gas : <li>가스 없음</li>} */}
-        <label>카테고리</label>
-        <select className="select margin-bottom-1e" onChange={onCategory}>
-          <option value="fashion">패션</option>
+        <div style={{marginRight: '19.3%', marginLeft: '19.3%', marginTop: '5%'}}>
+        <label className="label-text" >카테고리</label>
+        <select className="select margin-bottom-1e" onChange={onCategory} >
+          <option className="option" value="fashion">패션</option>
           <option value="it">IT</option>
           <option value="food">음식</option>
         </select>
 
-        <label>등록할 계정 주소</label>
+        <label className="label-text">등록할 계정 주소</label>
         <input
           disabled
           className="input-text"
           type="text"
           value={address}
+          style = {{marginRight:'19%'}}
         ></input>
 
-        <label>페이지 주소</label>
+        <label className="label-text">페이지 주소</label>
         <input
           type="text"
           className="input-text"
@@ -131,13 +133,13 @@ const Register = ({ address, tokenBalance }) => {
           onChange={onPage}
         ></input>
 
-        <label>검색용 태그</label>
+        <label className="label-text">검색용 태그</label>
         <input className="input-text" type="text" onChange={onTag}></input>
 
-        <label>목표 좋아요 개수</label>
+        <label className="label-text">목표 좋아요 개수</label>
         <input className="number" type="number" onChange={onGoal}></input>
 
-        <label>마케팅 보상 토큰</label>
+        <label className="label-text">마케팅 보상 토큰</label>
         <input className="number" type="number" onChange={onReward}></input>
         <input
           className="regbutton"
@@ -145,6 +147,7 @@ const Register = ({ address, tokenBalance }) => {
           value="등록하기"
           onClick={onRegister}
         ></input>
+        </div>
       </div>
     </Container>
   );
