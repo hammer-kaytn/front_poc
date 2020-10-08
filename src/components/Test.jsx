@@ -71,7 +71,7 @@ const Test = ({ address }) => {
       });
   };
   return (
-    <div>
+    <div className="padding-top-4e">
       <h1>노드 접근 관련 테스트 페이지</h1>
       {address}
       <input onChange={onChange}></input>

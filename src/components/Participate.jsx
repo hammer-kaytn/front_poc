@@ -2,7 +2,7 @@ import React from "react";
 
 const Participate = ({ address }) => {
   return (
-    <div>
+    <div className="padding-top-4e">
       <h1>참여하기 페이지</h1>
       {address}
     </div>

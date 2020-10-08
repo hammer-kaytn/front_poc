@@ -67,7 +67,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
   if (loading) return <div>로딩중..</div>;
   if (error)
     return (
-      <div>
+      <div className="padding-top-4e">
         <Container>
           <Row>
             <Col xs={12} sm={4} md={2}>
@@ -108,7 +108,7 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
   if (!accounts) return null;
 
   return (
-    <div>
+    <div className="padding-top-4e">
       <Container>
         <Row>
           <Col xs={12} sm={4} md={2}>

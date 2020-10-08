@@ -8,7 +8,7 @@ import TxLists from "./TxLists";
 
 const Token = ({ address, balance, tokenSymbol, tokenBalance }) => {
   return (
-    <div>
+    <div className="padding-top-4e">
       <Container>
         <Row>
           <Col xs={12} sm={4} md={2}>

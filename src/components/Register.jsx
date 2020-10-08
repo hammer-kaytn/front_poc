@@ -105,7 +105,7 @@ const Register = ({ address, tokenBalance }) => {
   };
 
   return (
-    <Container>
+    <Container className="padding-top-4e">
       <div className="register">
         {/* {gas ? gas : <li>가스 없음</li>} */}
         <label>카테고리</label>

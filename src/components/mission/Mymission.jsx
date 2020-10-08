@@ -4,7 +4,7 @@ import Sidebar from "../Sidebar";
 
 const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
   return (
-    <div>
+    <div className="padding-top-4e">
       <Container>
         <Row>
           <Col xs={12} sm={4} md={2}>
