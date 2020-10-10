@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: left;
+}
+
+.missions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(400px, 1fr));
+  grid-gap: 100px;
+  padding: 50px;
+  width: 50%;
+  padding-top: 70px;
+}
+
+@media screen and (max-width: 1090px) {
+  .missions {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}
+
+.intro {
+  width: 275px;
+  height: 34px;
+  font-family: NotoSansKR;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #506270;
+}
+
+.intro2 {
+  width: 275px;
+  height: 34px;
+  font-family: NotoSansKR;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #abb0ea;
+}

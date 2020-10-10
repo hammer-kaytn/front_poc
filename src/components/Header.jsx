@@ -16,6 +16,7 @@ const Header = ({ address }) => {
           <Link to="/participate">참여하기</Link>
           <Link to="/register">등록하기</Link>
           </div>
+
         <div className={styles.navbarRight}>
           
         {address ? (

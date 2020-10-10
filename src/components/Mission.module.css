@@ -1,0 +1,109 @@
+* {
+  color: #6a6767
+}
+
+/* --------------------ITEM DETAIL ------------------ */
+
+.detail {
+  text-align: center;
+  margin: 3em 0 3em 0;
+  
+}
+
+.title {
+  max-width: 55rem;
+}
+
+.datas {
+  margin-left: 2em;
+}
+
+.count {
+  font-size: 2rem;
+}
+
+.counttitle {
+  font-size: 0.7rem;
+  padding:0;
+  margin:0;
+}
+
+.line {
+  height: 1px;
+  flex-basis: 100%;
+  background-color: #abb0ea;
+  margin-top:0rem;
+  margin-bottom: 2rem;
+}
+
+.data {
+  margin-left: 0;
+}
+
+.category {
+  border: 0.1rem solid darkgray;
+  background-color:whitesmoke;
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  width: 3em;
+  height: 3em;
+  font-size: 0.7rem;
+}
+
+.details {
+  display: flex;
+}
+
+.image {
+  display: flex;
+  width: 35em;
+  height: 25em;
+}
+
+.button{
+  background-color: #abb0ea;
+  border: 0.1rem solid #dadce0;
+  border-radius: 5px;
+  margin-top: 2rem;
+  width: 18em;
+  height: 3em;
+  color: white;
+}
+.button:hover {
+  background-color: #dadce0;
+}
+
+.metadata {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.metacount {
+  display: flex;
+  align-items: flex-end;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+}
+
+/* -------------------- LIKED LIST ---------------- */
+
+.midline {
+  height: 2em;
+  margin:20px 0px 20px 0px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #f7f7f8;
+  background-color: #ffffff;
+}
+
+.btn {
+  background-color:white;
+  border: 0.1rem solid white;
+  font-size: 0.8em;
+  align-items: center;
+  padding: 0 20px 7px 20px;
+}
+
+.btn:hover {
+  color: #abb0ea;
+  border-bottom:0.2rem solid #abb0ea;
+}

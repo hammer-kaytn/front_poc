@@ -16,6 +16,8 @@ const Register = ({ address, tokenBalance }) => {
   const [tag, setTag] = useState("");
   const [goal, setGoal] = useState("");
   const [reward, setReward] = useState("");
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
 
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
   // const [from, setFrom] = useState("");
@@ -41,6 +43,14 @@ const Register = ({ address, tokenBalance }) => {
 
   const onReward = (e) => {
     setReward(e.target.value);
+  };
+
+  const onTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  
+  const onImage = (e) => {
+    setImage(e.target.value);
   };
 
   const onRegister = async (e) => {
@@ -93,6 +103,8 @@ const Register = ({ address, tokenBalance }) => {
       reward: await reward,
       missionId: await missionId,
       deadline: await deadline,
+      title: await title,
+      image: await image,
     };
     console.log(obj);
 
@@ -123,6 +135,21 @@ const Register = ({ address, tokenBalance }) => {
           type="text"
           value={address}
           style = {{marginRight:'19%'}}
+        ></input>
+        <label className="label-text">제목</label>
+        <input
+          type="text"
+          className="input-text"
+          placeholder="제목"
+          onChange={onTitle}
+        ></input>
+
+        <label className="label-text">이미지</label>
+        <input
+          type="text"
+          className="input-text"
+          placeholder="이미지 소스"
+          onChange={onImage}
         ></input>
 
         <label className="label-text">페이지 주소</label>

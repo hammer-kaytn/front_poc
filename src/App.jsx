@@ -12,6 +12,7 @@ import Mymission from "./components/mission/Mymission";
 import Mysns from "./components/sns/Mysns";
 import Token from "./components/token/Token";
 import Test from "./components/Test";
+import Mission from "./components/Mission";
 
 import "./App.scss";
 
@@ -73,6 +74,10 @@ const App = () => {
           render={() => (
             <Register address={account} tokenBalance={tokenBalance} />
           )}
+        />
+        <Route
+          path="/mission/:id"
+          component={Mission}
         />
         <Route
           path="/mypage/mysns"
