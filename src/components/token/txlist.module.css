@@ -1,0 +1,28 @@
+.txlists {
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.txlists td,
+.txlists th {
+  border: 1px solid #abb0ea;
+  padding: 8px;
+  text-align: center;
+}
+
+.txlists tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.txlists tr:hover {
+  background-color: #f2f2f2;
+}
+
+.txlists th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #abb0ea;
+  color: white;
+}

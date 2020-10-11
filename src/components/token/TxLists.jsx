@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
+import styles from "./txlist.module.css";
 
-import Table from "react-bootstrap/Table";
-
-export default function TableList() {
+const TxLists = ({address}) => {
   const axios = require("axios");
   const [txlists, setTxlists] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -15,7 +14,7 @@ export default function TableList() {
       setTxlists(null);
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/transfers");
+      const response = await axios.get(`http://localhost:5000/api/transfers/${address}`);
       setTxlists(response.data.items);
       console.log(response.data.items);
     } catch (e) {
@@ -26,49 +25,33 @@ export default function TableList() {
 
   useEffect(() => {
     fetchTxlists();
-  }, []);
-
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
-  if (!txlists) return null;
+  }, [address]);
 
   return (
     <div>
-      <Table aria-label="simple table">
-        <thead>
+      <table className={styles.txlists}>
           <tr>
-            <th>
-              <b>TX HASH</b>
-            </th>
-            <th>
-              <b>보낸주소</b>
-            </th>
-            <th>
-              <b>받은주소</b>
-            </th>
-            <th>
-              <b>토큰수량</b>
-            </th>
+            <th>TX HASH</th>            
+            <th>보낸주소</th>
+            <th>받은주소</th>
+            <th>토큰수량</th>
           </tr>
-        </thead>
-        <tbody>
-          {txlists.map((txList) => (
-            <tr key={txList.id}>
-              <th component="th" scope="row">
-                <a
-                  href={`https://baobab.scope.klaytn.com/tx/${txList.transactionHash}?tabId=kctTransfer`}
+    
+      {txlists &&
+            txlists.map((txlist) => (               
+              <tr key={txlist._id}>
+              <td><a
+                  href={`https://baobab.scope.klaytn.com/tx/${txlist.transactionHash}?tabId=kctTransfer`}
                   target="_blank"
-                >
-                  {txList.transactionHash.substring(0, 10)}...
-                </a>
-              </th>
-              <th align="center">{txList.from.substring(0, 10)}...</th>
-              <th align="center">{txList.to.substring(0, 10)}...</th>
-              <th align="center">{txList.value}</th>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+                >{txlist.transactionHash.substring(0, 10)}...</a></td>
+              <td>{txlist.from.substring(0, 10)}...</td>
+              <td>{txlist.to.substring(0, 10)}...</td>
+              <td>{txlist.value}</td>
+              </tr>
+            ))}
+            </table>
     </div>
   );
-}
+};
+
+export default TxLists;

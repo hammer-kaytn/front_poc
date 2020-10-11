@@ -1,5 +1,5 @@
 * {
-  color: #6a6767
+  color: #6a6767;
 }
 
 /* --------------------ITEM DETAIL ------------------ */
@@ -7,7 +7,6 @@
 .detail {
   text-align: center;
   margin: 3em 0 3em 0;
-  
 }
 
 .title {
@@ -24,15 +23,15 @@
 
 .counttitle {
   font-size: 0.7rem;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
 }
 
 .line {
   height: 1px;
   flex-basis: 100%;
   background-color: #abb0ea;
-  margin-top:0rem;
+  margin-top: 0rem;
   margin-bottom: 2rem;
 }
 
@@ -42,7 +41,7 @@
 
 .category {
   border: 0.1rem solid darkgray;
-  background-color:whitesmoke;
+  background-color: whitesmoke;
   border-radius: 3px;
   padding: 0.2rem 0.5rem;
   width: 3em;
@@ -60,7 +59,7 @@
   height: 25em;
 }
 
-.button{
+.button {
   background-color: #abb0ea;
   border: 0.1rem solid #dadce0;
   border-radius: 5px;
@@ -89,14 +88,14 @@
 
 .midline {
   height: 2em;
-  margin:20px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   border: solid 1px #f7f7f8;
   background-color: #ffffff;
 }
 
 .btn {
-  background-color:white;
+  background-color: white;
   border: 0.1rem solid white;
   font-size: 0.8em;
   align-items: center;
@@ -105,5 +104,21 @@
 
 .btn:hover {
   color: #abb0ea;
-  border-bottom:0.2rem solid #abb0ea;
+  border-bottom: 0.2rem solid #abb0ea;
+}
+
+/* 좋아요 리스트 업 */
+.ul {
+  list-style: none;
+}
+.ul li::before {
+  content: '';
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/fb-heart.gif);
+  background-size: contain;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: 0.1rem;
+  margin-right: 0.2rem;
 }

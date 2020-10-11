@@ -87,10 +87,11 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
                   당신의 지갑 주소 : {address}
                 </div>
                 <div className="align-center padding-btm-1e">
-                  연결할 SNS 계정 주소 :
+                  연결할 이메일 주소 :
                   <input
                     required
                     value={snsAccount}
+                    type="email"
                     onChange={onChange}
                   ></input>
                 </div>
@@ -128,10 +129,11 @@ const Mysns = ({ address, balance, tokenSymbol, tokenBalance }) => {
                 당신의 지갑 주소 : {address}
               </div>
               <div className="align-center padding-btm-1e">
-                수정할 SNS 계정 주소 :{" "}
+                수정할 이메일 주소 :{" "}
                 <input
                   required
                   placeholder={accounts.snsAccount}
+                  type="email"
                   onChange={onChange}
                 ></input>
               </div>

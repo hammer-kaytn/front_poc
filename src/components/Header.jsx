@@ -30,7 +30,7 @@ const Header = ({ address }) => {
               <i class="fa fa-caret-down"></i>
             </button>
             <div className={styles.dropdownContent}>
-              <Link to="/mypage/mysns">SNS 계정 연결</Link>
+              <Link to="/mypage/mysns">이메일 주소 연결</Link>
               <Link to="/mypage/mymission">내 미션 현황</Link>
               <Link to="/mypage/token">토큰 관리</Link>
             </div>
