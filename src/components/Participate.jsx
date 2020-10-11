@@ -27,7 +27,7 @@ const Participate = () => {
 
   return (
     <div className="padding-top-4e">
-      <div className={styles.categoryWhite} >
+      <div id="fashion" className={styles.categoryWhite} >
       <p className="font-bold-700 font-1H font-color-lightgray">패션</p>
       <span className={styles.intro}>
         <span className={styles.intro2}>{fashions.length}</span>개의 미션이 있습니다.
@@ -56,7 +56,7 @@ const Participate = () => {
       </section>
       </div>
 
-      <div className={styles.categoryGray} >
+      <div id="it" className={styles.categoryGray} >
       <p className="font-bold-700 font-1H font-color-lightgray">IT</p>
       <span className={styles.intro}>
         <span className={styles.intro2}>{its.length}</span>개의 미션이 있습니다.
@@ -85,7 +85,7 @@ const Participate = () => {
       </section>
       </div>
 
-      <div className={styles.categoryWhite} >
+      <div id="food" className={styles.categoryWhite} >
       <p className="font-bold-700 font-1H font-color-lightgray">음식</p>
       <span className={styles.intro}>
         <span className={styles.intro2}>{foods.length}</span>개의 미션이 있습니다.
