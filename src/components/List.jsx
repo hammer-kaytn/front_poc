@@ -12,13 +12,13 @@ const List = ({
   goal,
   reward,
   tag,
-  account,
   length,
+  missionId
 }) => {
   
   return (
     <>
-    <Link to ={{pathname: `/mission/${id}`, state : {id, title, image, category, goal, reward, tag}}}>
+    <Link to ={{pathname: `/mission/${missionId}`, state : {id, title, image, category, goal, reward, tag}}}>
       <section className={styles.container}>
         <div className={styles.mission}>
           <img className={styles.img} src={image} />

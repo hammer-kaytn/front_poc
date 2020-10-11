@@ -40,7 +40,8 @@ class Participate extends React.Component {
             
             {this.state.missions &&
               this.state.missions.map((mission) => (
-                <Link to ={`/mission/${Mission._id}`}>
+                // <Link to ={`/mission/${Mission._id}`}>
+                 <Link to ={`/mission/${Mission._missionId}`}> 
                 <List
                 key={mission._id}
                   id={mission._id}
@@ -51,6 +52,7 @@ class Participate extends React.Component {
                   tag={mission.tag}
                   reward={mission.reward}
                   account={mission.account}
+                  missionId={mission.missionId}
                 />
                 </Link>
               ))}

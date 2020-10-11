@@ -14,8 +14,8 @@ const Register = ({ address, tokenBalance }) => {
   const [category, setCategory] = useState("fashion");
   const [page, setPage] = useState("");
   const [tag, setTag] = useState("");
-  const [goal, setGoal] = useState("");
-  const [reward, setReward] = useState("");
+  const [goal, setGoal] = useState(0);
+  const [reward, setReward] = useState(0);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
 
@@ -111,7 +111,7 @@ const Register = ({ address, tokenBalance }) => {
     axios.post("http://localhost:5000/api/mission", obj).then(
       (res) => console.log(res.data),
       alert("데이터 베이스에 정상적으로 등록 되었습니다")
-      // (document.location.href = "/mypage/mymission/")
+      (document.location.href = `/mission/${missionId}`)
     );
     //e.preventDefault();
   };

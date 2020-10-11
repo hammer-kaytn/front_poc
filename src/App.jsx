@@ -75,9 +75,19 @@ const App = () => {
             <Register address={account} tokenBalance={tokenBalance} />
           )}
         />
-        <Route
+        {/* <Route
           path="/mission/:id"
           component={Mission}
+        /> */}
+        <Route
+          path="/mission/:missionId"
+          render={(props) => (
+            <Mission
+              address={account}
+              tokenBalance={tokenBalance}
+              {...props}
+            />
+          )}
         />
         <Route
           path="/mypage/mysns"

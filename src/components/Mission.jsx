@@ -3,40 +3,50 @@ import axios from "axios";
 import styles from "./Mission.module.css";
 
 
-async function getMission ({ id }) {
-  // const id ={id}
-  const response = await axios.get(`http://localhost:5000/api/mission/${id}`);
-  const res = response.data
-  console.log(res);
-}
+const Misson = ({ match, address, tokenBalance }) => {
+  const axios = require("axios");
+  const setAddress = { address }
+  let missionId = match.params.missionId
+   
+  const [mission, setMission] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);  
 
-function Mission ({match}) {
-  // console.log(match.params)
-  const id = match.params
-  // console.log(id)
-
-  /*
-  useEffect(() => {
-    async function getMission() {
-      const response= await axios.get(`http://localhost:5000/api/mission/${id}`);
-      const mission = response.data
-      console.log(mission);
+  const fetchMission = async () => {
+    try {
+      // 요청이 시작 할 때에는 error 초기화하고
+      setError(null);
+      setMission(null);
+      // loading 상태를 true 로 바꿉니다.
+      setLoading(true);
+      const response = await axios.get(
+        `http://localhost:5000/api/mission/${missionId}`
+      );
+      setMission(response.data);
+    } catch (e) {
+      setError(e);
     }
-    getMission();
-  }, []);
-  */
+    setLoading(false);
+  };
 
-  getMission(id);
+  useEffect(() => {
+    fetchMission();
+  }, []);
+
+  if (loading) return <div>로딩중..</div>;
+  if (error) return <div>에러가 발생했습니다.</div>
+  if (!mission) return null;
 
   return(
-    <container>
+    
+    <container>      
       <section className={styles.detail}>
-        <i className={styles.category}>카테고리</i>
-      <h1 className={styles.title}>타이틀타이틀타이틀타이틀틀타이틀틀타이틀틀타이틀틀타이틀틀타이틀타이틀타이틀타이틀</h1>
+        <i className={styles.category}>{mission.category}</i>
+        <h1 className={styles.title}>{mission.title}</h1>
       </section>
 
     <section className={styles.details}>
-      <img className={styles.image} src="https://source.unsplash.com/featured/?water,mountain" alt="detail item image" />
+      <img className={styles.image} src={mission.image} />
       <div className={styles.datas}>
         <div className={styles.data}>
           <ul className={styles.counttitle}>남은 기간</ul>
@@ -52,13 +62,13 @@ function Mission ({match}) {
           <ul className={styles.counttitle}>달성 수치</ul>
           <div className={styles.metadata}>
             <div className={styles.count}>726</div>
-            <div className={styles.metacount}>/ 1000❤️</div> 
+            <div className={styles.metacount}>/ {mission.goal}❤️</div> 
           </div>
         </div>
         <div className={styles.data}>
           <ul className={styles.counttitle}>총 보상 리워드</ul>
           <div className={styles.metadata}>
-            <div className={styles.count}>500</div>
+            <div className={styles.count}>{mission.reward}</div>
             <div className={styles.metacount}>HLT</div> 
           </div>
         </div>
@@ -73,9 +83,6 @@ function Mission ({match}) {
     </section>
   </container>
   )
-}
+};
 
-
-
-export default Mission;
-
+export default Misson;
