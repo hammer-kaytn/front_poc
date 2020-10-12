@@ -4,8 +4,12 @@ import logo from "../logo.png";
 import "./Register.scss";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-const Header = ({ address }) => {
+const Header = ({ address, parentFunc }) => {
   const addrStr = `${address}`.substring(0, 4);
+
+  const loadFunc =()=> {
+    parentFunc()
+  }
   return (
     <div>
       <div className={styles.navbar}>
@@ -22,10 +26,10 @@ const Header = ({ address }) => {
         {address ? (
             <span><p className="font-color-lightgray">{addrStr}...님 안녕하세요</p></span>
           ) : (
-            <a href="#about">카이카스 연결</a>
+            <a href="#login" onClick={loadFunc}>카이카스 연결</a>
           )}
           <div className={styles.dropdown}>
-            <button className={styles.dropbtn}>
+            <button className={styles.dropbtn} >
               마이페이지
               <i class="fa fa-caret-down"></i>
             </button>

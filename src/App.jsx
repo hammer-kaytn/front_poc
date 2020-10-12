@@ -62,7 +62,7 @@ const App = () => {
 
   return (
     <Router>
-      <Header address={account} />
+      <Header address={account} parentFunc={loadAccountInfo}/>
       <div>
         <Route exact path="/" render={() => <Home address={account} />} />
         <Route
@@ -119,6 +119,7 @@ const App = () => {
               balance={balance}
               tokenBalance={tokenBalance}
               tokenSymbol={tokenSymbol}
+              parentFunc={loadAccountInfo}
             />
           )}
         />
