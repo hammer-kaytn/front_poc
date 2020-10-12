@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import styles from "./auth.module.css";
 
-let result
+let result ="ready"
 
 const Auth = ({ address, balance, tokenSymbol, tokenBalance }) => {
     const axios = require("axios");
@@ -43,26 +43,26 @@ const Auth = ({ address, balance, tokenSymbol, tokenBalance }) => {
         axios.post("http://localhost:5000/api/auth/", obj).then(
           (res) => alert(res.data)
         );
-        e.preventDefault();
+        // e.preventDefault();
     }
 
     const onVerify = (e) =>{ //인증번호 확인 관련 함수
-        const obj = {
-            phoneNumber: phoneNumber,
-            verifyCode: verifyNumber,
-          };
-        axios.post("http://localhost:5000/api/auth/verify", obj).then(
-          (res) => setAuthResult(res.data)
-        );
-        resultVerify()
-        e.preventDefault();
+      const obj = {
+        phoneNumber: phoneNumber,
+        verifyCode: verifyNumber,
+      };
+    axios.post("http://localhost:5000/api/auth/verify", obj).then(
+      async(res) => await(result = res.data, resultVerify())
+    );
+    
+    e.preventDefault();
+        
     }
 
     const resultVerify =()=>{
-        console.log(authResult)
-        if (authResult==="fail") {
+        if (result==="fail") {
             alert('인증번호를 정확히 입력 해 주세요.')            
-        } else if(authResult==="success") {
+        } else if(result==="success") {
             alert('본인 인증에 성공하였습니다.')
             onSubmit()
         }
