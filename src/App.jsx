@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import Participate from "./components/Participate";
 import Register from "./components/Register";
 import Mymission from "./components/mission/Mymission";
-import Mysns from "./components/sns/Mysns";
+import Myaccount from "./components/account/Myaccount";
 import Token from "./components/token/Token";
 import Test from "./components/Test";
 import Mission from "./components/Mission";
@@ -75,10 +75,6 @@ const App = () => {
             <Register address={account} tokenBalance={tokenBalance} />
           )}
         />
-        {/* <Route
-          path="/mission/:id"
-          component={Mission}
-        /> */}
         <Route
           path="/mission/:missionId"
           render={(props) => (
@@ -90,9 +86,9 @@ const App = () => {
           )}
         />
         <Route
-          path="/mypage/mysns"
+          path="/mypage/myaccount"
           render={() => (
-            <Mysns
+            <Myaccount
               address={account}
               balance={balance}
               tokenBalance={tokenBalance}

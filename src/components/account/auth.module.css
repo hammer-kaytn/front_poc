@@ -1,4 +1,4 @@
-.snsbutton {
+.authbtn {
   width: 250px;
   background-color: #abb0ea;
   color: white;
@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
-.snsbutton:hover {
+.authbtn:hover {
   background-color: #7f87e0;
+}
+
+.authinput {
+  width: 250px;
 }

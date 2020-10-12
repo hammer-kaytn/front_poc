@@ -7,6 +7,7 @@ import * as config from "../config";
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
+let checkAuth
 
 const Misson = ({ match, address, tokenBalance }) => {
   const axios = require("axios");
@@ -42,38 +43,45 @@ const Misson = ({ match, address, tokenBalance }) => {
   }
 
   const onLike =()=>{
-    
-    try {
-      const newArray= mymissions.map((mission) =>{
-        return mission.missionId
-        })
-   
-        const result = checkMission(newArray, missionId)
-        if (result===true) {
-          alert(`이미 참여한 미션입니다. 미션번호 : ${missionId}`)
-          movePage()
-        } else if ( tokenBalance < 1) {
-        alert(`참여 토큰이 부족합니다. 참여필요토큰 : 1 / 현재보유토큰 : ${tokenBalance}`)
-        } else {
-         addBlock() //블록 기록부터 적용
-        //  addDatabase() //데이터베이스 기록부터 적용
-        }
-    } catch (error) {
-      console.log(error)
+    if (checkAuth==="false") {
+      alert("본인 인증 한 계정만 미션 참여가 가능합니다.")
+    } else {
+
+      try {
+        const newArray= mymissions.map((mission) =>{
+          return mission.missionId
+          })
+     
+          const result = checkMission(newArray, missionId)
+          if (result===true) {
+            alert(`이미 참여한 미션입니다. 미션번호 : ${missionId}`)
+            // movePage()
+          } else if ( tokenBalance < 1) {
+          alert(`참여 토큰이 부족합니다. 참여필요토큰 : 1 / 현재보유토큰 : ${tokenBalance}`)
+          } else {
+           addBlock() //블록 기록부터 적용
+          //  addDatabase() //데이터베이스 기록부터 적용
+          }
+      } catch (error) {
+        console.log(error)
+      }
     }
+    
     
    }
 
    const getMissions = async () => { //지갑 계정의 미션 참가 확인 기록 불러오기
     try {
       let account = {address}.address
+      checkAuth="true"
     const mymissions = await axios.get(`http://localhost:5000/api/accounts/${account}`)
     console.log(mymissions.data.participateList)
     SetMymissions(mymissions.data.participateList)   
       
     } catch (error) {
-      alert("이메일을 먼저 등록해 주세요.")
-      (document.location.href = '/mypage/mysns')
+      checkAuth="false"
+      // alert("본인 인증을 먼저 해 주세요.")
+      // (document.location.href = '/mypage/myaccount')
     }    
    }
  
@@ -126,7 +134,7 @@ const Misson = ({ match, address, tokenBalance }) => {
    console.log(obj)
    axios.post("http://localhost:5000/api/mission/updateMission", obj).then(
       (res) => console.log(res.data),
-     alert("현재 미션에 정상적으로 참여하였습니다."),
+     alert("현재 미션에 정상적으로 참여하였습니다. 해당 페이지에서 꼭 좋아요를 눌러주세요. :)"),
     (document.location.href = `/mission/${missionId}`),
     movePage()
    );
