@@ -6,7 +6,7 @@
   position: relative;
   background-color: white;
   padding: 10px;
-  max-width: 300px;
+  max-width: 250px;
   max-height: 700px;
   border-radius: 5px;
   color: #adaeb9;
@@ -14,6 +14,7 @@
     0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
   z-index: 1;
   text-decoration: none;
+  margin: 30px;
 }
 
 .container:hover {
@@ -48,7 +49,7 @@
 .mission img {
   margin-bottom: 20px;
   position: relative;
-  max-width: 300px;
+  max-width: 250px;
   max-height: 10rem;
   width: 100%;
   box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
@@ -57,7 +58,7 @@
 }
 
 .title {
-  width: 275px;
+  width: 240px;
   font-family: NotoSansKR;
   font-size: 20px;
   font-weight: bold;
@@ -74,7 +75,7 @@
 }
 
 .categoryandtag {
-  width: 275px;
+  width: 240px;
   height: 22px;
   font-family: NotoSansKR;
   font-size: 13px;
@@ -88,7 +89,7 @@
 }
 
 .tag {
-  width: 275px;
+  width: 240px;
   height: 22px;
   font-family: NotoSansKR;
   font-size: 13px;
@@ -101,10 +102,8 @@
   color: #050505;
 }
 
-
-
 .reward {
-  width: 356px;
+  width: 240px;
   height: 24px;
   font-family: NotoSansKR;
   font-size: 14px;
@@ -115,9 +114,11 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
+  margin:0;
 }
 
 .line {
+  margin: 5px 0 5px 0;
   width: 100%;
   height: 0;
   border: solid 1px #abb0ea;
@@ -135,9 +136,10 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
+  margin:0;
 }
 .summary {
-  width: 270px;
+  width: 240px;
   height: 48px;
   font-family: NotoSansKR;
   font-size: 15px;
@@ -148,6 +150,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #050505;
+  margin:0;
 }
 
 .rewarddata {

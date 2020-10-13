@@ -4,6 +4,7 @@ import List from "./List";
 import styles from "./Participate.module.css";
 import Mission from "./Mission";
 import { Link } from "react-router-dom";
+import Carousel from 'react-elastic-carousel';
 
 const Participate = () => {
   const [fashions, SetFashions] = useState([])
@@ -35,7 +36,8 @@ const Participate = () => {
       </span>
       <section className={styles.container}>
         <div className={styles.missions}>
-          
+        <Carousel 
+          itemsToShow={3} transitionMs={200}>
           {fashions &&
             fashions.map((fashion) => (
                <Link to ={`/mission/${Mission._missionId}`}> 
@@ -54,6 +56,7 @@ const Participate = () => {
               />
               </Link>
             ))}
+            </Carousel>
         </div>
       </section>
       </div>
@@ -65,7 +68,7 @@ const Participate = () => {
       </span>
       <section className={styles.container}>
         <div className={styles.missions}>
-          
+        <Carousel itemsToShow={3} transitionMs={200}>
           {its &&
             its.map((it) => (
                <Link to ={`/mission/${Mission._missionId}`}> 
@@ -84,6 +87,7 @@ const Participate = () => {
               />
               </Link>
             ))}
+            </Carousel>
         </div>
       </section>
       </div>
@@ -95,7 +99,7 @@ const Participate = () => {
       </span>
       <section className={styles.container}>
         <div className={styles.missions}>
-          
+        <Carousel itemsToShow={3} transitionMs={200}>
           {foods &&
             foods.map((food) => (
                <Link to ={`/mission/${Mission._missionId}`}> 
@@ -114,6 +118,7 @@ const Participate = () => {
               />
               </Link>
             ))}
+            </Carousel>
         </div>
       </section>
       </div>

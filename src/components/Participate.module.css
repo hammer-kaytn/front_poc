@@ -26,15 +26,14 @@
   justify-content: left;
 }
 
+
 .missions {
   display: flex;
   flex-direction: row;
   /* grid-template-columns: repeat(3, minmax(400px, 1fr)); */
   grid-gap: 100px;
-  padding: 50px;
-  width: 50%;
+  width: 1000px;
   padding-top: 30px;
-  
 }
 
 @media screen and (max-width: 1090px) {
