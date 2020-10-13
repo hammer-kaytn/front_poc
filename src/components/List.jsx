@@ -25,14 +25,16 @@ const List = ({
           <img className={styles.img} src={image} />
           {/* <div className={styles.deadline}>{deadline}</div> */}
           <h5 className={styles.title}>{title} 타이틀 </h5>
-          <h5 className={styles.category}>{category} 카테고리 </h5>
-          <h3 className={styles.goal}>{goal} 달성숫자 / 목표 </h3>
+            <h5 className={styles.categoryandtag}>{category} | {tag} </h5>
           <h3 className={styles.summary}>나는 누구인가 커피를 오늘 
-안 먹었는데 어찌하면 좋단 말인가</h3>
+            안 먹었는데 어찌하면 좋단 말인가
+          </h3>
           <hr className={styles.line} />
-          <h3 className={styles.deadline}>{deadline} 마감</h3>
+          <div className={styles.rewarddata}>
+            <h3 className={styles.goal}>{goal} 달성숫자 / 목표 </h3>
+            <h3 className={styles.deadline}>{deadline} 마감</h3>
+          </div>
           <h3 className={styles.reward}>{reward}보상 </h3>
-          <h3 className={styles.tag}>{tag} 태그</h3>
           
           {/* <h3 className={styles.account}>{account}</h3> */}
 

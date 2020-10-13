@@ -21,6 +21,7 @@
   text-decoration: none;
 }
 
+
 .deadline {
   width: 356px;
   height: 24px;
@@ -33,6 +34,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
+  text-align: right;
 }
 /* .container .mission a {
   display: grid;
@@ -43,6 +45,7 @@
 } */
 
 .mission img {
+  margin-bottom: 20px;
   position: relative;
   max-width: 300px;
   max-height: 10rem;
@@ -53,9 +56,7 @@
 }
 
 .title {
-  margin-top:30px;
   width: 275px;
-  height: 58px;
   font-family: NotoSansKR;
   font-size: 20px;
   font-weight: bold;
@@ -71,7 +72,7 @@
 
 }
 
-.category {
+.categoryandtag {
   width: 275px;
   height: 22px;
   font-family: NotoSansKR;
@@ -82,7 +83,7 @@
   line-height: 2.08;
   letter-spacing: normal;
   text-align: left;
-  color: #050505;
+  color: #adaeb9;
 }
 .tag {
   width: 275px;
@@ -97,6 +98,9 @@
   text-align: left;
   color: #050505;
 }
+
+
+
 .reward {
   width: 356px;
   height: 24px;
@@ -142,4 +146,8 @@
   letter-spacing: normal;
   text-align: left;
   color: #050505;
+}
+
+.rewarddata {
+  display: flex;
 }
