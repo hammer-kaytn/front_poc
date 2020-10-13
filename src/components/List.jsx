@@ -24,7 +24,7 @@ const List = ({
           <img className={styles.img} src={image} />
           {/* <div className={styles.deadline}>{deadline}</div> */}
           <h5 className={styles.title}>{title} </h5>
-          <h5 className={styles.category}>{category}</h5>
+          {/* <h5 className={styles.category}>{category}</h5> */}
           <h3 className={styles.goal}>{goal}</h3>
           <h3 className={styles.reward}>{reward}</h3>
           <h3 className={styles.tag}>{tag}</h3>

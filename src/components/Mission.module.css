@@ -70,9 +70,12 @@
   width: 18em;
   height: 3em;
   color: white;
+  transition: all 200ms ease-in-out;
 }
+
 .button:hover {
   background-color: #dadce0;
+
 }
 
 .metadata {
@@ -103,6 +106,7 @@
   font-size: 0.8em;
   align-items: center;
   padding: 0 20px 7px 20px;
+  transition: all 200ms ease-in-out;
 }
 
 .btn:hover {
