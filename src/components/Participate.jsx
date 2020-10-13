@@ -43,6 +43,7 @@ const Participate = () => {
               key={fashion._id}
                 id={fashion._id}
                 goal={fashion.goal}
+                likes={fashion.likes}
                 title={fashion.title}
                 image={fashion.image}
                 category={fashion.category}
@@ -72,6 +73,7 @@ const Participate = () => {
               key={it._id}
                 id={it._id}
                 goal={it.goal}
+                likes={it.likes}
                 title={it.title}
                 image={it.image}
                 category={it.category}
@@ -101,6 +103,7 @@ const Participate = () => {
               key={food._id}
                 id={food._id}
                 goal={food.goal}
+                likes={food.likes}
                 title={food.title}
                 image={food.image}
                 category={food.category}

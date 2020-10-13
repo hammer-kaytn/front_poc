@@ -12,6 +12,7 @@ const List = ({
   goal,
   reward,
   tag,
+  likes,
   length,
   missionId,
   deadline
@@ -31,10 +32,10 @@ const List = ({
           </h3>
           <hr className={styles.line} />
           <div className={styles.rewarddata}>
-            <h3 className={styles.goal}>{goal} 달성숫자 / 목표 </h3>
+            <h3 className={styles.goal}> {likes} / {goal} </h3>
             <h3 className={styles.deadline}>{deadline} 마감</h3>
           </div>
-          <h3 className={styles.reward}>{reward}보상 </h3>
+          <h3 className={styles.reward}>{reward} HLT </h3>
           
           {/* <h3 className={styles.account}>{account}</h3> */}
 
