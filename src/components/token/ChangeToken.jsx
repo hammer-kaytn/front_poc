@@ -19,7 +19,7 @@ const ChangeToken = ({ address, tokenBalance }) => {
     const gas = 300000;
     if (value <= 0) {
       alert("환전할 수량을 정확히 입력해 주세요.");
-    } else if (value > tokenBalance) {
+    } else if (value > parseInt(tokenBalance)) {
       alert("보유한 토큰이 부족합니다.");
     } else {
       const amount = caver.utils.toPeb(value, "KLAY");

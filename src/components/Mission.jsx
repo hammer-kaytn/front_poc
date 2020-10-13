@@ -56,7 +56,7 @@ const Misson = ({ match, address, tokenBalance }) => {
           if (result===true) {
             alert(`이미 참여한 미션입니다. 미션번호 : ${missionId}`)
             // movePage()
-          } else if ( tokenBalance < 1) {
+          } else if ( parseInt(tokenBalance) < 1) {
           alert(`참여 토큰이 부족합니다. 참여필요토큰 : 1 / 현재보유토큰 : ${tokenBalance}`)
           } else {
            addBlock() //블록 기록부터 적용

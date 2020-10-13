@@ -25,7 +25,7 @@ const TransferToken = ({ address, tokenBalance }) => {
       alert("받을 주소를 입력해 주세요.");
     } else if (value <= 0) {
       alert("전송할 수량을 정확히 입력해 주세요.");
-    } else if (value > tokenBalance) {
+    } else if (value > parseInt(tokenBalance)) {
       alert("보유한 토큰이 부족합니다.");
     } else {
       const data = caver.klay.abi.encodeFunctionCall(
