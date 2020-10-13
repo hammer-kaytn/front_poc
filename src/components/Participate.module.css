@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+.categorylist {
+  max-width: 65rem;
+  display: flex;
+  margin: auto;
+}
+
 .categoryGray {
   border-radius: 5px;
   background-color: #f2f2f2;

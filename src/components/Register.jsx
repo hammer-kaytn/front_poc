@@ -118,7 +118,7 @@ const Register = ({ address, tokenBalance }) => {
 
   return (
     <Container>
-      <div className="register" style={{marginRight: '-18%', marginLeft: '-20%', marginTop:'19.3%'}}>
+      <div className="register" >
         {/* {gas ? gas : <li>가스 없음</li>} */}
         <div style={{marginRight: '19.3%', marginLeft: '19.3%', marginTop: '5%'}}>
         <label className="label-text" >카테고리</label>
