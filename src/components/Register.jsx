@@ -61,7 +61,7 @@ const Register = ({ address, tokenBalance }) => {
     if (reward < 0) {
       //원래는 reward <=0 입력해야 하나 테스트 상 0 입력하기 위해 진행
       alert("마케팅 보상 수량을 정확히 입력해 주세요.");
-    } else if (reward > parseInt(token)) {
+    } else if (parseInt(reward) > parseInt(token)) {
       alert(`보유 토큰이 부족합니다. 현재 보유 토큰 : ${token}`);
     } else {
       contract.methods

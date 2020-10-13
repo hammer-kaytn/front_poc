@@ -19,7 +19,7 @@ const BuyToken = ({ address, balance }) => {
     const gas = 300000;
     if (value <= 0) {
       alert("구매할 수량을 정확히 입력해 주세요.");
-    } else if (value > parseInt(balance)) {
+    } else if (parseInt(value) > parseInt(balance)) {
       alert(`보유한 클레이가 부족합니다. ${value} ${balance}`);
     } else {
       contract.methods
