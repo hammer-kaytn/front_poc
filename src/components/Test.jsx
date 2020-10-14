@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import caver from "../klaytn/caver";
-import * as config from "../config";
+import React, { useState, useEffect } from 'react';
+import caver from '../klaytn/caver';
+import * as config from '../config';
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
 const Test = ({ address }) => {
-  const [missionId, setMissionId] = useState("");
+  const [missionId, setMissionId] = useState('');
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
   const [gas, setGas] = useState(300000);
 
@@ -22,14 +22,14 @@ const Test = ({ address }) => {
         from,
         gas,
       })
-      .on("transactionHash", (transactionHash) => {
-        console.log("txHash", transactionHash);
+      .on('transactionHash', (transactionHash) => {
+        console.log('txHash', transactionHash);
       })
-      .on("receipt", (receipt) => {
-        console.log("receipt", receipt);
+      .on('receipt', (receipt) => {
+        console.log('receipt', receipt);
       })
-      .on("error", (error) => {
-        console.log("error", error);
+      .on('error', (error) => {
+        console.log('error', error);
       });
   };
 
@@ -41,34 +41,36 @@ const Test = ({ address }) => {
         from,
         gas,
       })
-      .on("transactionHash", (transactionHash) => {
-        console.log("txHash", transactionHash);
+      .on('transactionHash', (transactionHash) => {
+        console.log('txHash', transactionHash);
       })
-      .on("receipt", (receipt) => {
-        console.log("receipt", receipt);
+      .on('receipt', (receipt) => {
+        console.log('receipt', receipt);
       })
-      .on("error", (error) => {
-        console.log("error", error);
+      .on('error', (error) => {
+        console.log('error', error);
       });
   };
 
   const onGet = () => {
-    const from = address;
-    contract.methods
-      .getMission(missionId)
-      .send({
-        from,
-        gas,
-      })
-      .on("transactionHash", (transactionHash) => {
-        console.log("txHash", transactionHash);
-      })
-      .on("receipt", (receipt) => {
-        console.log("receipt", receipt);
-      })
-      .on("error", (error) => {
-        console.log("error", error);
-      });
+    // const from = address;
+    // contract.methods
+    //   .getMission(missionId)
+    //   .send({
+    //     from,
+    //     gas,
+    //   })
+    //   .on("transactionHash", (transactionHash) => {
+    //     console.log("txHash", transactionHash);
+    //   })
+    //   .on("receipt", (receipt) => {
+    //     console.log("receipt", receipt);
+    //   })
+    //   .on("error", (error) => {
+    //     console.log("error", error);
+    //   });
+    let date = Date.now;
+    console.log(date);
   };
   return (
     <div className="padding-top-4e">

@@ -169,6 +169,7 @@ const Misson = ({ match, address, tokenBalance }) => {
       <section className={styles.detail}>
         <i className={styles.category}>{mission.category}</i>
         <h1 className={styles.title}>{mission.title}</h1>
+        <h3 className={styles.title}>{mission.content}</h3>
       </section>
 
       <section className={styles.details}>

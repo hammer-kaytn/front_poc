@@ -1,6 +1,8 @@
 ## 2020-10-14(수)
 
 1. Likes 충족 되면 참가 못하게 수정
+2. Register에서 Content 추가하게 수정
+3. List 및 Mission 페이지 에서 content 나오게 수정
 
 ## 2020-10-13(화)
 

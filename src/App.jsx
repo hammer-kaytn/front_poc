@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import caver from "./klaytn/caver";
-import * as config from "./config";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import caver from './klaytn/caver';
+import * as config from './config';
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Home from "./components/Home";
-import Participate from "./components/Participate";
-import Register from "./components/Register";
-import Mymission from "./components/mission/Mymission";
-import Myaccount from "./components/account/Myaccount";
-import Token from "./components/token/Token";
-import Test from "./components/Test";
-import Mission from "./components/Mission";
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Participate from './components/Participate';
+import Register from './components/Register';
+import Mymission from './components/mission/Mymission';
+import Myaccount from './components/account/Myaccount';
+import Token from './components/token/Token';
+import Test from './components/Test';
+import Mission from './components/Mission';
 
-import "./App.scss";
+import './App.scss';
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 
 const App = () => {
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState('');
   const [balance, setBalance] = useState(0);
-  const [tokenSymbol, setTokenSymbol] = useState("");
+  const [tokenSymbol, setTokenSymbol] = useState('');
   const [tokenBalance, setTokenBalance] = useState(0);
 
   useEffect(() => {
@@ -34,13 +34,13 @@ const App = () => {
       try {
         await klaytn.enable();
         setAccountInfo(klaytn);
-        klaytn.on("accountsChanged", () => setAccountInfo(klaytn));
+        klaytn.on('accountsChanged', () => setAccountInfo(klaytn));
       } catch (error) {
-        console.log("User denied account access");
+        console.log('User denied account access');
       }
     } else {
       console.log(
-        "Non-Kaikas browser detected. You should consider trying Kaikas!"
+        'Non-Kaikas browser detected. You should consider trying Kaikas!',
       );
     }
   };
@@ -55,16 +55,20 @@ const App = () => {
     const temptokenbalance = await kip7.balanceOf(tempaccount);
 
     setAccount(tempaccount);
-    setBalance(caver.utils.fromPeb(tempbalance, "KLAY"));
+    setBalance(caver.utils.fromPeb(tempbalance, 'KLAY'));
     setTokenSymbol(await kip7.symbol());
-    setTokenBalance(caver.utils.fromPeb(temptokenbalance, "KLAY"));
+    setTokenBalance(caver.utils.fromPeb(temptokenbalance, 'KLAY'));
   };
 
   return (
     <Router>
-      <Header address={account} parentFunc={loadAccountInfo}/>
+      <Header address={account} parentFunc={loadAccountInfo} />
       <div>
-        <Route exact path="/" render={() => <Home address={account} />} />
+        <Route
+          exact
+          path="/"
+          render={() => <Participate address={account} />}
+        />
         <Route
           path="/participate"
           render={() => <Participate address={account} />}
@@ -78,11 +82,7 @@ const App = () => {
         <Route
           path="/mission/:missionId"
           render={(props) => (
-            <Mission
-              address={account}
-              tokenBalance={tokenBalance}
-              {...props}
-            />
+            <Mission address={account} tokenBalance={tokenBalance} {...props} />
           )}
         />
         <Route
