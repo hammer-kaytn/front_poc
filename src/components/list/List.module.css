@@ -5,7 +5,7 @@
 .container {
   position: relative;
   background-color: white;
-  padding: 10px;
+  /* padding: 10px; */
   max-width: 250px;
   max-height: 700px;
   border-radius: 5px;
@@ -47,12 +47,13 @@
 } */
 
 .mission img {
+  padding: 30px 10px 0 10px;
   margin-bottom: 20px;
   position: relative;
   max-width: 250px;
-  max-height: 10rem;
+  max-height: 15rem;
   width: 100%;
-  height: 150px;
+  height: 160px;
   box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
     0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
   z-index: 2;
@@ -72,7 +73,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
+  margin-left: 18px;
 }
 
 .categoryandtag {
@@ -87,6 +88,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #adaeb9;
+  margin-left:10px;
 }
 
 .tag {
@@ -115,7 +117,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
-  margin:0;
+  margin:0 10px  0 10px;
 }
 
 .line {
@@ -151,9 +153,18 @@
   letter-spacing: normal;
   text-align: left;
   color: #050505;
-  margin:0;
+  margin: 0 10px 0 10px;
 }
 
 .rewarddata {
   display: flex;
+  margin: 0 10px 0 10px;
+}
+
+/* STATUS IMAGE */
+.statusimage{
+  width: 250px;
+  height: 360px;
+  position: absolute;
+  z-index: 5;
 }

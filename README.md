@@ -1,3 +1,7 @@
+## 2020-10-16(금)
+1. 진행중 & 종료 리스트 디자인 적용 
+2. list 디렉토리 추가 및 {list, list.module.css, end_image.png, ing_image.png} 이동
+
 ## 2020-10-15(목)
 
 1. 참여하기 라우터 경로 수정(/participate -> /mission)

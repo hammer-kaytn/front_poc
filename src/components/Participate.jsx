@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import List from './List';
+import List from './list/List';
 import styles from './Participate.module.css';
 import Mission from './Mission';
 import { Link } from 'react-router-dom';
