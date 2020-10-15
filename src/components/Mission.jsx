@@ -7,7 +7,7 @@ import * as config from '../config';
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
-let checkAuth;
+let checkAuth = 'true';
 
 const Misson = ({ match, address, tokenBalance }) => {
   const axios = require('axios');
@@ -33,18 +33,18 @@ const Misson = ({ match, address, tokenBalance }) => {
         `http://localhost:5000/api/mission/${missionId}`,
       );
       setMission(response.data);
+
+      let account = { address }.address;
+      const mymissions = await axios.get(
+        `http://localhost:5000/api/mission/participateList/${account}`,
+      );
+      console.log(mymissions.data);
+      SetMymissions(mymissions.data);
     } catch (e) {
       setError(e);
     }
     setLoading(false);
   };
-
-  // const checkDate = () => {
-  //   let date = new Date(test);
-
-  //   createDate = date.setDate(date.getDate() + 30);
-  //   console.log(createDate);
-  // };
 
   const movePage = () => {
     window.open(mission.page);
@@ -59,11 +59,17 @@ const Misson = ({ match, address, tokenBalance }) => {
           return mission.missionId;
         });
 
+        const checkMission = (array, value) => {
+          //내가 참여했는지 확인하는 함수
+          // console.log(array.some((arrayValue) => value === arrayValue));
+          return array.indexOf(parseInt(value));
+        };
+
         const result = checkMission(newArray, missionId);
         if (mission.likes >= mission.goal) {
           console.log(missionId.likes);
           alert(`이미 목표가 달성된 미션입니다. : ${missionId}`);
-        } else if (result === true) {
+        } else if (result != -1) {
           alert(`이미 참여한 미션입니다. 미션번호 : ${missionId}`);
           // movePage()
         } else if (parseInt(tokenBalance) < 1) {
@@ -80,27 +86,10 @@ const Misson = ({ match, address, tokenBalance }) => {
     }
   };
 
-  const getMissions = async () => {
-    //지갑 계정의 미션 참가 확인 기록 불러오기
-    try {
-      let account = { address }.address;
-      checkAuth = 'true';
-      const mymissions = await axios.get(
-        `http://localhost:5000/api/accounts/${account}`,
-      );
-      console.log(mymissions.data.participateList);
-      SetMymissions(mymissions.data.participateList);
-    } catch (error) {
-      checkAuth = 'false';
-      // alert("본인 인증을 먼저 해 주세요.")
-      // (document.location.href = '/mypage/myaccount')
-    }
-  };
-
   const checkMission = (array, value) => {
     //내가 참여했는지 확인하는 함수
-    console.log(array);
-    return array.some((arrayValue) => value === arrayValue);
+    // console.log(array.some((arrayValue) => value === arrayValue));
+    return array.indexOf(parseInt(value));
   };
 
   const addBlock = () => {
@@ -123,7 +112,7 @@ const Misson = ({ match, address, tokenBalance }) => {
       })
       .then(async () => {
         alert('블록에 정보 저장을 성공하였습니다.');
-        await addDatabase();
+        await updateMission();
       });
   };
 
@@ -163,7 +152,6 @@ const Misson = ({ match, address, tokenBalance }) => {
   };
 
   useEffect(() => {
-    getMissions();
     fetchMission();
   }, [address]);
 
