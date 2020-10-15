@@ -28,7 +28,7 @@ const Participate = () => {
   }, []);
 
   return (
-    <container className={styles.categorylist}>
+    <div className={styles.categorylist}>
       <div className="padding-top-4e">
         <div id="fashion" className={styles.categoryWhite}>
           <p className="font-bold-700 font-1H font-color-lightgray">패션</p>
@@ -135,7 +135,7 @@ const Participate = () => {
           </section>
         </div>
       </div>
-    </container>
+    </div>
   );
 };
 

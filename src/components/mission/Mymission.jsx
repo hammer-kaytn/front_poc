@@ -5,40 +5,30 @@ import styles from '../token/txlist.module.css';
 
 const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
   const axios = require('axios');
-  // const setAddress = { address };
   const [mymissions, SetMymissions] = useState([]);
   const [myparticipated, SetMyparticipated] = useState([]);
 
-  // 내가 참여한 미션 확인하는 함수
   const getMissions = async () => {
     try {
       let account = { address }.address;
+      // 내가 참여한 미션 확인하는 함수
       const mymissions = await axios.get(
         `http://localhost:5000/api/mission/participateList/${account}`,
       );
-      console.log(mymissions.data);
       SetMymissions(mymissions.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  // 내가 등록한 미션 확인하는 함수
-  const getParticipated = async () => {
-    try {
-      let account = { address }.address;
+      //내가 등록한 미션 확인하는 함수
       const myparticipated = await axios.get(
         `http://localhost:5000/api/mission/account/${account}`,
       );
       SetMyparticipated(myparticipated.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   useEffect(() => {
     getMissions();
-    getParticipated();
   }, [address]);
 
   return (
@@ -63,27 +53,34 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
                 내 참여 미션
               </h6>
               <table className={styles.txlists}>
-                <tr>
-                  <th className={styles.category}>카테고리</th>
-                  <th className={styles.title}>제목</th>
-                  <th className={styles.liked}>미션 진행상황(현재/목표)</th>
-                  <th className={styles.status}>상태</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th className={styles.category}>카테고리</th>
+                    <th className={styles.title}>제목</th>
+                    <th className={styles.liked}>미션 진행상황(현재/목표)</th>
+                    <th className={styles.status}>상태</th>
+                  </tr>
+                </thead>
 
                 {mymissions &&
                   mymissions.map((mission) => (
-                    <tr key={mission._id}>
-                      <td>{mission.category}</td>
-                      <td>
-                        <a className={styles.titlelink} href={`/mission/${mission.missionId}`}>
-                          {mission.title}
-                        </a>
-                      </td>
-                      <td>
-                        {mission.likes} / {mission.goal}
-                      </td>
-                      <td>{mission.status}</td>
-                    </tr>
+                    <tbody key={mission._id}>
+                      <tr>
+                        <td>{mission.category}</td>
+                        <td>
+                          <a
+                            className={styles.titlelink}
+                            href={`/mission/${mission.missionId}`}
+                          >
+                            {mission.title}
+                          </a>
+                        </td>
+                        <td>
+                          {mission.likes} / {mission.goal}
+                        </td>
+                        <td>{mission.status}</td>
+                      </tr>
+                    </tbody>
                   ))}
               </table>
             </div>
@@ -93,27 +90,34 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
                 내 등록 미션
               </h6>
               <table className={styles.txlists}>
-                <tr>
-                  <th className={styles.category}>카테고리</th>
-                  <th className={styles.title}>제목</th>
-                  <th className={styles.liked}>미션 진행상황(현재/목표)</th>
-                  <th className={styles.status}>상태</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th className={styles.category}>카테고리</th>
+                    <th className={styles.title}>제목</th>
+                    <th className={styles.liked}>미션 진행상황(현재/목표)</th>
+                    <th className={styles.status}>상태</th>
+                  </tr>
+                </thead>
 
                 {myparticipated &&
                   myparticipated.map((mission) => (
-                    <tr key={mission._id}>
-                      <td>{mission.category}</td>
-                      <td>
-                        <a className={styles.titlelink} href={`/mission/${mission.missionId}`}>
-                          {mission.title}
-                        </a>
-                      </td>
-                      <td>
-                        {mission.likes} / {mission.goal}
-                      </td>
-                      <td>{mission.status}</td>
-                    </tr>
+                    <tbody key={mission._id}>
+                      <tr>
+                        <td>{mission.category}</td>
+                        <td>
+                          <a
+                            className={styles.titlelink}
+                            href={`/mission/${mission.missionId}`}
+                          >
+                            {mission.title}
+                          </a>
+                        </td>
+                        <td>
+                          {mission.likes} / {mission.goal}
+                        </td>
+                        <td>{mission.status}</td>
+                      </tr>
+                    </tbody>
                   ))}
               </table>
             </div>

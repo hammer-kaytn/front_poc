@@ -6,7 +6,7 @@ import * as config from '../config';
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
-let missionId, deadline;
+let missionId;
 
 const Register = ({ address, tokenBalance }) => {
   const axios = require('axios');
@@ -82,10 +82,7 @@ const Register = ({ address, tokenBalance }) => {
           'receipt',
           async (receipt) => (
             console.log('receipt', receipt),
-            (missionId = await receipt.events.GeneratedMission.returnValues
-              ._id),
-            (deadline = await receipt.events.GeneratedMission.returnValues
-              ._deadline)
+            (missionId = await receipt.events.GeneratedMission.returnValues._id)
           ),
         )
         .on('error', (error) => {

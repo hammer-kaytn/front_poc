@@ -7,7 +7,7 @@ import * as config from '../config';
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
-let checkAuth;
+let checkAuth, term;
 
 const Misson = ({ match, address, tokenBalance }) => {
   const axios = require('axios');
@@ -38,7 +38,11 @@ const Misson = ({ match, address, tokenBalance }) => {
       setMission(response.data);
 
       // 남은 기간 체크 함수 호출
-      // checkTerm();
+      // term = Math.ceil(
+      //   (new Date(mission.deadline).getTime() - new Date().getTime()) /
+      //     (1000 * 3600 * 24),
+      // );
+      // console.log(term);
 
       // 현재 미션에서 현재 address 참여했는지 조회
       const mymissions = await axios.get(
@@ -143,13 +147,7 @@ const Misson = ({ match, address, tokenBalance }) => {
   };
 
   // 남은 기간 구하는 함수
-  const checkTerm = () => {
-    const sdt = new Date();
-    const edt = new Date(mission.deadline);
-    const term = Math.ceil(
-      (edt.getTime() - sdt.getTime()) / (1000 * 3600 * 24),
-    );
-  };
+  const checkTerm = () => {};
 
   useEffect(() => {
     fetchMission();
@@ -160,7 +158,7 @@ const Misson = ({ match, address, tokenBalance }) => {
   if (!mission) return null;
 
   return (
-    <container>
+    <div>
       <section className={styles.detail}>
         <i className={styles.category}>{mission.category}</i>
         <h1 className={styles.title}>{mission.title}</h1>
@@ -211,7 +209,7 @@ const Misson = ({ match, address, tokenBalance }) => {
           ))}
         </ul>
       </section>
-    </container>
+    </div>
   );
 };
 

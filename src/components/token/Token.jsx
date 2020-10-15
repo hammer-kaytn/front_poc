@@ -21,8 +21,8 @@ const Token = ({ address, balance, tokenSymbol, tokenBalance }) => {
           </Col>
           <Col xs={12} sm={8} md={10}>
             <BuyToken address={address} balance={balance} />
-            <TransferToken address={address} tokenBalance={tokenBalance} />
             <ChangeToken address={address} tokenBalance={tokenBalance} />
+            <TransferToken address={address} tokenBalance={tokenBalance} />
             <TxLists address={address} />
           </Col>
         </Row>
