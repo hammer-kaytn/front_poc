@@ -39,6 +39,13 @@ const Misson = ({ match, address, tokenBalance }) => {
     setLoading(false);
   };
 
+  // const checkDate = () => {
+  //   let date = new Date(test);
+
+  //   createDate = date.setDate(date.getDate() + 30);
+  //   console.log(createDate);
+  // };
+
   const movePage = () => {
     window.open(mission.page);
   };

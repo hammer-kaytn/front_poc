@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Sidebar from '../Sidebar';
+import styles from '../token/txlist.module.css';
 
 const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
   const axios = require('axios');
@@ -15,8 +16,8 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
       const mymissions = await axios.get(
         `http://localhost:5000/api/mission/participateList/${account}`,
       );
-      console.log(mymissions.data.participateList);
-      SetMymissions(mymissions.data.participateList);
+      console.log(mymissions.data);
+      SetMymissions(mymissions.data);
     } catch (error) {
       console.log(error);
     }
@@ -57,29 +58,65 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
               내 미션 현황
             </p>
 
-            <h6>내 참여 미션</h6>
-            {mymissions &&
-              mymissions.map((mission) => (
-                <ol key={mission._id}>
-                  <li>
-                    <a href={`/mission/${mission.missionId}`}>
-                      {mission.missionId}
-                    </a>
-                  </li>
-                </ol>
-              ))}
+            <div>
+              <h6 className="font-bold-700 padding-top-1e font-color-lightgray">
+                내 참여 미션
+              </h6>
+              <table className={styles.txlists}>
+                <tr>
+                  <th>카테고리</th>
+                  <th>제목</th>
+                  <th>미션 진행상황(현재/목표)</th>
+                  <th>상태</th>
+                </tr>
 
-            <h6>내 등록 미션</h6>
-            {myparticipated &&
-              myparticipated.map((mission) => (
-                <ol key={mission._id}>
-                  <li>
-                    <a href={`/mission/${mission.missionId}`}>
-                      {mission.missionId}
-                    </a>
-                  </li>
-                </ol>
-              ))}
+                {mymissions &&
+                  mymissions.map((mission) => (
+                    <tr key={mission._id}>
+                      <td>{mission.category}</td>
+                      <td>
+                        <a href={`/mission/${mission.missionId}`}>
+                          {mission.title}
+                        </a>
+                      </td>
+                      <td>
+                        {mission.likes} / {mission.goal}
+                      </td>
+                      <td>{mission.status}</td>
+                    </tr>
+                  ))}
+              </table>
+            </div>
+
+            <div>
+              <h6 className="font-bold-700 padding-top-1e font-color-lightgray">
+                내 등록 미션
+              </h6>
+              <table className={styles.txlists}>
+                <tr>
+                  <th>카테고리</th>
+                  <th>제목</th>
+                  <th>미션 진행상황(현재/목표)</th>
+                  <th>상태</th>
+                </tr>
+
+                {myparticipated &&
+                  myparticipated.map((mission) => (
+                    <tr key={mission._id}>
+                      <td>{mission.category}</td>
+                      <td>
+                        <a href={`/mission/${mission.missionId}`}>
+                          {mission.title}
+                        </a>
+                      </td>
+                      <td>
+                        {mission.likes} / {mission.goal}
+                      </td>
+                      <td>{mission.status}</td>
+                    </tr>
+                  ))}
+              </table>
+            </div>
           </Col>
         </Row>
       </Container>

@@ -70,7 +70,8 @@ const App = () => {
           render={() => <Participate address={account} />}
         />
         <Route
-          path="/participate"
+          exact
+          path="/mission"
           render={() => <Participate address={account} />}
         />
         <Route

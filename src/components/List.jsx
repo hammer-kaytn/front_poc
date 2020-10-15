@@ -13,8 +13,9 @@ const List = ({
   likes,
   length,
   missionId,
-  deadline,
+  // deadline,
   content,
+  create_date,
 }) => {
   return (
     <>
@@ -23,7 +24,7 @@ const List = ({
           pathname: `/mission/${missionId}`,
           state: {
             id,
-            deadline,
+            // deadline,
             title,
             image,
             category,
@@ -31,6 +32,7 @@ const List = ({
             reward,
             tag,
             content,
+            create_date,
           },
         }}
       >
@@ -49,7 +51,7 @@ const List = ({
                 {' '}
                 {likes} / {goal}{' '}
               </h3>
-              <h3 className={styles.deadline}>{deadline} 마감</h3>
+              <h3 className={styles.deadline}> 마감</h3>
             </div>
             <h3 className={styles.reward}>{reward} HLT </h3>
 
