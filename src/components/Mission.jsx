@@ -7,39 +7,54 @@ import * as config from '../config';
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
-let checkAuth = 'true';
+let checkAuth;
 
 const Misson = ({ match, address, tokenBalance }) => {
   const axios = require('axios');
   const setAddress = { address };
   let missionId = match.params.missionId;
+  let account = { address }.address;
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
   const [gas, setGas] = useState(300000);
-  const [mymissions, SetMymissions] = useState([]);
 
   const [mission, setMission] = useState(null);
+  const [mymissions, setMymissions] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchMission = async () => {
-    //현재 미션 정보 읽어오기
     try {
       // 요청이 시작 할 때에는 error 초기화하고
       setError(null);
       setMission(null);
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
+
+      // 현재 미션 정보 읽어오기
       const response = await axios.get(
         `http://localhost:5000/api/mission/${missionId}`,
       );
       setMission(response.data);
 
-      let account = { address }.address;
+      // 남은 기간 체크 함수 호출
+      // checkTerm();
+
+      // 현재 미션에서 현재 address 참여했는지 조회
       const mymissions = await axios.get(
         `http://localhost:5000/api/mission/participateList/${account}`,
       );
-      console.log(mymissions.data);
-      SetMymissions(mymissions.data);
+      setMymissions(mymissions.data);
+
+      // 본인인증 했는지 확인
+      try {
+        const auths = await axios.get(
+          `http://localhost:5000/api/accounts/${account}`,
+        );
+        checkAuth = 'true'; // 계정이 있으면 true
+      } catch (error) {
+        checkAuth = 'false'; // 계정이 없으면(error 발생하면) false
+      }
     } catch (e) {
       setError(e);
     }
@@ -55,13 +70,11 @@ const Misson = ({ match, address, tokenBalance }) => {
       alert('본인 인증 한 계정만 미션 참여가 가능합니다.');
     } else {
       try {
+        // 내가 참여했는지 확인하는 함수
         const newArray = mymissions.map((mission) => {
           return mission.missionId;
         });
-
         const checkMission = (array, value) => {
-          //내가 참여했는지 확인하는 함수
-          // console.log(array.some((arrayValue) => value === arrayValue));
           return array.indexOf(parseInt(value));
         };
 
@@ -84,12 +97,6 @@ const Misson = ({ match, address, tokenBalance }) => {
         console.log(error);
       }
     }
-  };
-
-  const checkMission = (array, value) => {
-    //내가 참여했는지 확인하는 함수
-    // console.log(array.some((arrayValue) => value === arrayValue));
-    return array.indexOf(parseInt(value));
   };
 
   const addBlock = () => {
@@ -116,22 +123,6 @@ const Misson = ({ match, address, tokenBalance }) => {
       });
   };
 
-  const addDatabase = () => {
-    //데이터베이스에 기록하는 함수(내가 참여한 기록 추가)
-    const obj = {
-      account: setAddress.address,
-      missionId: missionId,
-    };
-    console.log(obj);
-    axios
-      .post('http://localhost:5000/api/accounts/addMission', obj)
-      .then(
-        (res) => console.log(res.data),
-        alert('데이터 베이스에 정상적으로 등록 되었습니다'),
-        updateMission(),
-      );
-  };
-
   const updateMission = () => {
     //데이터베이스에 기록하는 함수(현재 미션에 내 지갑 주소 추가, 좋아요 +1)
     const obj = {
@@ -149,6 +140,15 @@ const Misson = ({ match, address, tokenBalance }) => {
         (document.location.href = `/mission/${missionId}`),
         movePage(),
       );
+  };
+
+  // 남은 기간 구하는 함수
+  const checkTerm = () => {
+    const sdt = new Date();
+    const edt = new Date(mission.deadline);
+    const term = Math.ceil(
+      (edt.getTime() - sdt.getTime()) / (1000 * 3600 * 24),
+    );
   };
 
   useEffect(() => {
@@ -207,7 +207,7 @@ const Misson = ({ match, address, tokenBalance }) => {
 
         <ul className={styles.ul}>
           {mission.participateList.map((mission) => (
-            <li>{mission.account}</li>
+            <li key={mission._id}>{mission.account}</li>
           ))}
         </ul>
       </section>

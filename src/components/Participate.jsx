@@ -56,6 +56,7 @@ const Participate = () => {
                         missionId={fashion.missionId}
                         content={fashion.content}
                         create_date={fashion.create_date}
+                        status={fashion.status}
                       />
                     </Link>
                   ))}
@@ -90,6 +91,7 @@ const Participate = () => {
                         missionId={it.missionId}
                         content={it.content}
                         create_date={it.create_date}
+                        status={it.status}
                       />
                     </Link>
                   ))}
@@ -124,6 +126,7 @@ const Participate = () => {
                         missionId={food.missionId}
                         content={food.content}
                         create_date={food.create_date}
+                        status={food.status}
                       />
                     </Link>
                   ))}

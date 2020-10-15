@@ -16,6 +16,7 @@ const List = ({
   // deadline,
   content,
   create_date,
+  status,
 }) => {
   return (
     <>
@@ -33,6 +34,7 @@ const List = ({
             tag,
             content,
             create_date,
+            status,
           },
         }}
       >
@@ -51,7 +53,7 @@ const List = ({
                 {' '}
                 {likes} / {goal}{' '}
               </h3>
-              <h3 className={styles.deadline}> 마감</h3>
+              <h3 className={styles.deadline}>{status}</h3>
             </div>
             <h3 className={styles.reward}>{reward} HLT </h3>
 
