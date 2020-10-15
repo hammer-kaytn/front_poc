@@ -64,10 +64,10 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
               </h6>
               <table className={styles.txlists}>
                 <tr>
-                  <th>카테고리</th>
-                  <th>제목</th>
-                  <th>미션 진행상황(현재/목표)</th>
-                  <th>상태</th>
+                  <th className={styles.category}>카테고리</th>
+                  <th className={styles.title}>제목</th>
+                  <th className={styles.liked}>미션 진행상황(현재/목표)</th>
+                  <th className={styles.status}>상태</th>
                 </tr>
 
                 {mymissions &&
@@ -75,7 +75,7 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
                     <tr key={mission._id}>
                       <td>{mission.category}</td>
                       <td>
-                        <a href={`/mission/${mission.missionId}`}>
+                        <a className={styles.titlelink} href={`/mission/${mission.missionId}`}>
                           {mission.title}
                         </a>
                       </td>
@@ -94,10 +94,10 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
               </h6>
               <table className={styles.txlists}>
                 <tr>
-                  <th>카테고리</th>
-                  <th>제목</th>
-                  <th>미션 진행상황(현재/목표)</th>
-                  <th>상태</th>
+                  <th className={styles.category}>카테고리</th>
+                  <th className={styles.title}>제목</th>
+                  <th className={styles.liked}>미션 진행상황(현재/목표)</th>
+                  <th className={styles.status}>상태</th>
                 </tr>
 
                 {myparticipated &&
@@ -105,7 +105,7 @@ const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
                     <tr key={mission._id}>
                       <td>{mission.category}</td>
                       <td>
-                        <a href={`/mission/${mission.missionId}`}>
+                        <a className={styles.titlelink} href={`/mission/${mission.missionId}`}>
                           {mission.title}
                         </a>
                       </td>
