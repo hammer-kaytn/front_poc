@@ -19,10 +19,34 @@
   background-color: #f2f2f2;
 }
 
+.titlelink {
+  display: block;
+  white-space: nowrap; 
+  width: 34rem; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .txlists th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
   background-color: #abb0ea;
   color: white;
+}
+
+.category {
+  width: 6rem;
+}
+
+.title {
+  width: 35rem;
+}
+
+.liked {
+  width: 12rem;
+}
+
+.status {
+  width:5rem;
 }
