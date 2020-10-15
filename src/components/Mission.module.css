@@ -11,7 +11,7 @@
 
 .title {
   max-width: 55rem;
-  margin: auto
+  margin: auto;
 }
 
 .datas {
@@ -75,7 +75,18 @@
 
 .button:hover {
   background-color: #dadce0;
+}
 
+.finished {
+  background-color: #dadce0;
+  text-align: center;
+  border: 0.1rem solid #dadce0;
+  border-radius: 5px;
+  margin-top: 2rem;
+  width: 18em;
+  height: 3em;
+  color: white;
+  transition: all 200ms ease-in-out;
 }
 
 .metadata {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import styles from './Mission.module.css';
 import caver from '../klaytn/caver';
 import * as config from '../config';
@@ -11,7 +11,6 @@ let checkAuth, dueDate;
 const today = new Date().getTime();
 
 const Misson = ({ match, address, tokenBalance }) => {
-  const axios = require('axios');
   const setAddress = { address };
   let missionId = match.params.missionId;
   let account = { address }.address;
@@ -24,47 +23,6 @@ const Misson = ({ match, address, tokenBalance }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const fetchMission = async () => {
-    try {
-      // 요청이 시작 할 때에는 error 초기화하고
-      setError(null);
-      setMission(null);
-      // loading 상태를 true 로 바꿉니다.
-      setLoading(true);
-
-      // 현재 미션 정보 읽어오기
-      const response = await axios.get(
-        `http://localhost:5000/api/mission/${missionId}`,
-      );
-      setMission(response.data);
-      dueDate = response.data.deadline;
-
-      // 남은 기간 체크 함수 호출
-      setTerm(
-        Math.ceil((new Date(dueDate).getTime() - today) / (1000 * 3600 * 24)),
-      );
-
-      // 현재 미션에서 현재 address 참여했는지 조회
-      const mymissions = await axios.get(
-        `http://localhost:5000/api/mission/participateList/${account}`,
-      );
-      setMymissions(mymissions.data);
-
-      // 본인인증 했는지 확인
-      try {
-        const auths = await axios.get(
-          `http://localhost:5000/api/accounts/${account}`,
-        );
-        checkAuth = 'true'; // 계정이 있으면 true
-      } catch (error) {
-        checkAuth = 'false'; // 계정이 없으면(error 발생하면) false
-      }
-    } catch (e) {
-      setError(e);
-    }
-    setLoading(false);
-  };
 
   const movePage = () => {
     window.open(mission.page);
@@ -143,19 +101,54 @@ const Misson = ({ match, address, tokenBalance }) => {
       .then(
         (res) => console.log(res.data),
         alert(
-          '현재 미션에 정상적으로 참여하였습니다. 해당 페이지에서 꼭 좋아요를 눌러주세요. :)',
+          '현재 미션에 정상적으로 참여하였습니다. \n해당 페이지에서 꼭 좋아요를 눌러주세요. :)',
         ),
         (document.location.href = `/mission/${missionId}`),
         movePage(),
       );
   };
 
-  // 남은 기간 구하는 함수
-  const checkTerm = () => {};
-
   useEffect(() => {
+    const fetchMission = async () => {
+      try {
+        // 요청이 시작 할 때에는 error 초기화하고
+        setError(null);
+        setMission(null);
+        // loading 상태를 true 로 바꿉니다.
+        setLoading(true);
+
+        // 현재 미션 정보 읽어오기
+        const response = await axios.get(
+          `http://localhost:5000/api/mission/${missionId}`,
+        );
+        setMission(response.data);
+        dueDate = response.data.deadline;
+
+        // 남은 기간 체크 함수 호출
+        setTerm(
+          Math.ceil((new Date(dueDate).getTime() - today) / (1000 * 3600 * 24)),
+        );
+
+        // 현재 미션에서 현재 address 참여했는지 조회
+        const mymissions = await axios.get(
+          `http://localhost:5000/api/mission/participateList/${account}`,
+        );
+        setMymissions(mymissions.data);
+
+        // 본인인증 했는지 확인
+        try {
+          await axios.get(`http://localhost:5000/api/accounts/${account}`);
+          checkAuth = 'true'; // 계정이 있으면 true
+        } catch (error) {
+          checkAuth = 'false'; // 계정이 없으면(error 발생하면) false
+        }
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
     fetchMission();
-  }, [address]);
+  }, [address, account, missionId]);
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다.</div>;
@@ -197,7 +190,7 @@ const Misson = ({ match, address, tokenBalance }) => {
             </div>
           </div>
           {mission.status === '종료' ? (
-            '종료된 미션입니다.'
+            <input className={styles.finished} value="종료된 미션입니다" />
           ) : (
             <button className={styles.button} onClick={onLike} type="submit">
               광고 보러 가기

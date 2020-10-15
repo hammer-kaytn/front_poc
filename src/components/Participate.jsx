@@ -40,10 +40,10 @@ const Participate = () => {
             <div className={styles.missions}>
               <Carousel itemsToShow={3} transitionMs={200}>
                 {fashions &&
-                  fashions.map((fashion) => (
+                  fashions.map((fashion, index) => (
                     <Link to={`/mission/${Mission._missionId}`}>
                       <List
-                        key={fashion._id}
+                        key={index}
                         id={fashion._id}
                         goal={fashion.goal}
                         likes={fashion.likes}
@@ -75,10 +75,10 @@ const Participate = () => {
             <div className={styles.missions}>
               <Carousel itemsToShow={3} transitionMs={200}>
                 {its &&
-                  its.map((it) => (
+                  its.map((it, index) => (
                     <Link to={`/mission/${Mission._missionId}`}>
                       <List
-                        key={it._id}
+                        key={index}
                         id={it._id}
                         goal={it.goal}
                         likes={it.likes}
@@ -110,10 +110,10 @@ const Participate = () => {
             <div className={styles.missions}>
               <Carousel itemsToShow={3} transitionMs={200}>
                 {foods &&
-                  foods.map((food) => (
+                  foods.map((food, index) => (
                     <Link to={`/mission/${Mission._missionId}`}>
                       <List
-                        key={food._id}
+                        key={index}
                         id={food._id}
                         goal={food.goal}
                         likes={food.likes}

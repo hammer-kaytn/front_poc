@@ -1,4 +1,4 @@
-export const DEPLOYED_ADDRESS = '0xA9fCE54343437e1c13C35eFf6B92157415eBd5dA';
+export const DEPLOYED_ADDRESS = '0xa9fce54343437e1c13c35eff6b92157415ebd5da';
 export const DEPLOYED_ABI = [
   {
     constant: false,

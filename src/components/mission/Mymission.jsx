@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 import Sidebar from '../Sidebar';
 import styles from '../token/txlist.module.css';
 
 const Mymission = ({ address, balance, tokenSymbol, tokenBalance }) => {
-  const axios = require('axios');
   const [mymissions, SetMymissions] = useState([]);
   const [myparticipated, SetMyparticipated] = useState([]);
 
-  const getMissions = async () => {
-    try {
-      let account = { address }.address;
-      // 내가 참여한 미션 확인하는 함수
-      const mymissions = await axios.get(
-        `http://localhost:5000/api/mission/participateList/${account}`,
-      );
-      SetMymissions(mymissions.data);
-
-      //내가 등록한 미션 확인하는 함수
-      const myparticipated = await axios.get(
-        `http://localhost:5000/api/mission/account/${account}`,
-      );
-      SetMyparticipated(myparticipated.data);
-    } catch (error) {
-      // console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getMissions = async () => {
+      try {
+        let account = { address }.address;
+        // 내가 참여한 미션 확인하는 함수
+        const mymissions = await axios.get(
+          `http://localhost:5000/api/mission/participateList/${account}`,
+        );
+        SetMymissions(mymissions.data);
+
+        //내가 등록한 미션 확인하는 함수
+        const myparticipated = await axios.get(
+          `http://localhost:5000/api/mission/account/${account}`,
+        );
+        SetMyparticipated(myparticipated.data);
+      } catch (error) {
+        // console.log(error);
+      }
+    };
     getMissions();
   }, [address]);
 

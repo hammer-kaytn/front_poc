@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import caver from '../klaytn/caver';
 import * as config from '../config';
 import styles from './token/txlist.module.css';
@@ -8,22 +9,11 @@ const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
 const Test = ({ address }) => {
-  const axios = require('axios');
   const [missionId, setMissionId] = useState('');
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
   let gas = 300000;
 
   const [lists, setLists] = useState([]);
-
-  const getMissions = async () => {
-    try {
-      // 등록된 모든 미션 확인하는 함수
-      const res = await axios.get('http://localhost:5000/api/mission/list');
-      setLists(res.data);
-    } catch (error) {
-      // console.log(error);
-    }
-  };
 
   const onChange = (e) => {
     setMissionId(e.target.value);
@@ -70,6 +60,15 @@ const Test = ({ address }) => {
   };
 
   useEffect(() => {
+    const getMissions = async () => {
+      try {
+        // 등록된 모든 미션 확인하는 함수
+        const res = await axios.get('http://localhost:5000/api/mission/list');
+        setLists(res.data);
+      } catch (error) {
+        // console.log(error);
+      }
+    };
     getMissions();
   }, [address]);
 

@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 import Sidebar from '../Sidebar';
 import Auth from './Auth';
 
 const Myaccount = ({ address, balance, tokenSymbol, tokenBalance }) => {
-  const axios = require('axios');
-  // const setAddress = { address };
   const [accounts, setAccounts] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // const [phoneNumber, setPhoneNumber] = useState("");
 
-  const fetchAccounts = async () => {
-    try {
-      // 요청이 시작 할 때에는 error 초기화하고
-      setError(null);
-      setAccounts(null);
-      // loading 상태를 true 로 바꿉니다.
-      setLoading(true);
-      const response = await axios.get(
-        `http://localhost:5000/api/accounts/${address}`,
-      );
-      setAccounts(response.data);
-      // console.log(accounts);
-    } catch (e) {
-      setError(e);
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const fetchAccounts = async () => {
+      try {
+        // 요청이 시작 할 때에는 error 초기화하고
+        setError(null);
+        setAccounts(null);
+        // loading 상태를 true 로 바꿉니다.
+        setLoading(true);
+        const response = await axios.get(
+          `http://localhost:5000/api/accounts/${address}`,
+        );
+        setAccounts(response.data);
+        // console.log(accounts);
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
     fetchAccounts();
   }, [address]);
 

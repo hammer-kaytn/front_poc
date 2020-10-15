@@ -13,10 +13,12 @@ const List = ({
   missionId,
   content,
   status,
+  index,
 }) => {
   return (
     <>
       <Link
+        key={index}
         to={{
           pathname: `/mission/${missionId}`,
         }}

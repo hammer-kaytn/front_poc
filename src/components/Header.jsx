@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './header.module.css';
 import logo from '../logo.png';
 import './Register.scss';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = ({ address, parentFunc }) => {
   const addrStr = `${address}`.substring(0, 4);
@@ -33,7 +33,7 @@ const Header = ({ address, parentFunc }) => {
         <div className={styles.dropdown}>
           <button className={styles.dropbtn}>
             마이페이지
-            <i class="fa fa-caret-down"></i>
+            <i className="fa fa-caret-down"></i>
           </button>
           <div className={styles.dropdownContent}>
             <Link to="/mypage/token">토큰 관리</Link>

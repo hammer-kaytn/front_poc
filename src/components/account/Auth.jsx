@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Col } from 'reactstrap';
 import styles from './auth.module.css';
 
-let result = 'ready';
+let result;
 
 const Auth = ({ address }) => {
   const axios = require('axios');
@@ -23,7 +23,7 @@ const Auth = ({ address }) => {
     // DB에 폰 번호가 저장되었는지 확인
     e.preventDefault();
     try {
-      const checkNumber = await axios.get(
+      await axios.get(
         `http://localhost:5000/api/accounts/phone/${phoneNumber}`,
       );
       alert('이미 등록된 휴대폰 번호입니다.');
@@ -40,7 +40,9 @@ const Auth = ({ address }) => {
     };
     axios
       .post('http://localhost:5000/api/auth/', obj)
-      .then((res) => alert(res.data));
+      .then(
+        async (res) => await ((result = res.data.statusName), resultAuth()),
+      );
     // e.preventDefault();
   };
 
@@ -55,6 +57,14 @@ const Auth = ({ address }) => {
       .then(async (res) => await ((result = res.data), resultVerify()));
 
     e.preventDefault();
+  };
+
+  const resultAuth = () => {
+    if (result === 'success') {
+      alert('인증번호 발송에 성공하였습니다.');
+    } else {
+      alert('인증번호 발송에 실패하였습니다.');
+    }
   };
 
   const resultVerify = () => {
