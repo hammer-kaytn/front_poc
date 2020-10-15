@@ -84,7 +84,10 @@ const Misson = ({ match, address, tokenBalance }) => {
         };
 
         const result = checkMission(newArray, missionId);
-        if (mission.likes >= mission.goal) {
+
+        if (term <= 0) {
+          alert(`기간이 종료된 미션입니다. : ${missionId}`);
+        } else if (mission.likes >= mission.goal) {
           console.log(missionId.likes);
           alert(`이미 목표가 달성된 미션입니다. : ${missionId}`);
         } else if (result !== -1) {
@@ -167,12 +170,12 @@ const Misson = ({ match, address, tokenBalance }) => {
       </section>
 
       <section className={styles.details}>
-        <img className={styles.image} src={mission.image} />
+        <img className={styles.image} src={mission.image} alt={mission.title} />
         <div className={styles.datas}>
           <div className={styles.data}>
             <ul className={styles.counttitle}>남은 기간</ul>
             <div className={styles.metadata}>
-              <div className={styles.count}>{term}</div>
+              <div className={styles.count}>{term <= 0 ? '0' : term}</div>
               <div className={styles.metacount}>일</div>
             </div>
           </div>
@@ -193,9 +196,13 @@ const Misson = ({ match, address, tokenBalance }) => {
               <div className={styles.metacount}>HLT</div>
             </div>
           </div>
-          <button className={styles.button} onClick={onLike} type="submit">
-            광고 보러 가기
-          </button>
+          {mission.status === '종료' ? (
+            '종료된 미션입니다.'
+          ) : (
+            <button className={styles.button} onClick={onLike} type="submit">
+              광고 보러 가기
+            </button>
+          )}
         </div>
       </section>
       <section>
