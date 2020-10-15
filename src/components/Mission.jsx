@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import styles from './Mission.module.css';
 import caver from '../klaytn/caver';
 import * as config from '../config';
@@ -7,7 +7,8 @@ import * as config from '../config';
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
-let checkAuth, term;
+let checkAuth, dueDate;
+const today = new Date().getTime();
 
 const Misson = ({ match, address, tokenBalance }) => {
   const axios = require('axios');
@@ -15,10 +16,11 @@ const Misson = ({ match, address, tokenBalance }) => {
   let missionId = match.params.missionId;
   let account = { address }.address;
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
-  const [gas, setGas] = useState(300000);
+  let gas = 300000;
 
   const [mission, setMission] = useState(null);
   const [mymissions, setMymissions] = useState([]);
+  const [term, setTerm] = useState(0);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -36,13 +38,12 @@ const Misson = ({ match, address, tokenBalance }) => {
         `http://localhost:5000/api/mission/${missionId}`,
       );
       setMission(response.data);
+      dueDate = response.data.deadline;
 
       // 남은 기간 체크 함수 호출
-      // term = Math.ceil(
-      //   (new Date(mission.deadline).getTime() - new Date().getTime()) /
-      //     (1000 * 3600 * 24),
-      // );
-      // console.log(term);
+      setTerm(
+        Math.ceil((new Date(dueDate).getTime() - today) / (1000 * 3600 * 24)),
+      );
 
       // 현재 미션에서 현재 address 참여했는지 조회
       const mymissions = await axios.get(
@@ -86,7 +87,7 @@ const Misson = ({ match, address, tokenBalance }) => {
         if (mission.likes >= mission.goal) {
           console.log(missionId.likes);
           alert(`이미 목표가 달성된 미션입니다. : ${missionId}`);
-        } else if (result != -1) {
+        } else if (result !== -1) {
           alert(`이미 참여한 미션입니다. 미션번호 : ${missionId}`);
           // movePage()
         } else if (parseInt(tokenBalance) < 1) {
@@ -171,7 +172,7 @@ const Misson = ({ match, address, tokenBalance }) => {
           <div className={styles.data}>
             <ul className={styles.counttitle}>남은 기간</ul>
             <div className={styles.metadata}>
-              <div className={styles.count}>10</div>
+              <div className={styles.count}>{term}</div>
               <div className={styles.metacount}>일</div>
             </div>
           </div>

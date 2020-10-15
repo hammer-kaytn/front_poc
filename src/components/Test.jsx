@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import caver from '../klaytn/caver';
 import * as config from '../config';
 
@@ -8,7 +8,8 @@ const DEPLOYED_ABI = config.DEPLOYED_ABI;
 const Test = ({ address }) => {
   const [missionId, setMissionId] = useState('');
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
-  const [gas, setGas] = useState(300000);
+  // const [gas, setGas] = useState(300000);
+  let gas = 300000;
 
   const onChange = (e) => {
     setMissionId(e.target.value);

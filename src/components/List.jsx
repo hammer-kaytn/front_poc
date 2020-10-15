@@ -3,7 +3,6 @@ import styles from './List.module.css';
 import { Link } from 'react-router-dom';
 
 const List = ({
-  id,
   title,
   image,
   category,
@@ -13,7 +12,6 @@ const List = ({
   likes,
   missionId,
   content,
-  create_date,
   status,
 }) => {
   return (
@@ -25,7 +23,7 @@ const List = ({
       >
         <section className={styles.container}>
           <div className={styles.mission}>
-            <img className={styles.img} src={image} />
+            <img className={styles.img} src={image} alt={title} />
             <h5 className={styles.title}>{title} 타이틀 </h5>
             <h5 className={styles.categoryandtag}>
               {category} | {tag}{' '}

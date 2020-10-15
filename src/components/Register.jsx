@@ -24,7 +24,8 @@ const Register = ({ address, tokenBalance }) => {
   // const [from, setFrom] = useState("");
   // const [to, setTo] = useState(DEPLOYED_ADDRESS);
   // const [value, setValue] = useState("");
-  const [gas, setGas] = useState(300000);
+  // const [gas, setGas] = useState(300000);
+  let gas = 300000;
 
   const onCategory = (e) => {
     setCategory(e.target.value);
@@ -78,11 +79,13 @@ const Register = ({ address, tokenBalance }) => {
         .on('transactionHash', (transactionHash) => {
           console.log('txHash', transactionHash);
         })
-        .on(
-          'receipt',
-          async (receipt) => (
-            console.log('receipt', receipt),
-            (missionId = await receipt.events.GeneratedMission.returnValues._id)
+        .on('receipt', async (receipt) =>
+          console.log(
+            'receipt',
+            receipt,
+          )(
+            (missionId = await receipt.events.GeneratedMission.returnValues
+              ._id),
           ),
         )
         .on('error', (error) => {

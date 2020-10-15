@@ -5,7 +5,7 @@ import * as config from './config';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './components/Home';
+// import Home from './components/Home';
 import Participate from './components/Participate';
 import Register from './components/Register';
 import Mymission from './components/mission/Mymission';
