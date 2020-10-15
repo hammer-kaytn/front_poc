@@ -201,9 +201,11 @@ const Misson = ({ match, address, tokenBalance }) => {
       <section>
         <div className={styles.midline}>
           <button className={styles.btn}>게시물 정보</button>
-          <button className={styles.btn}>좋아요 누른 사람들</button>
+          {/* <button className={styles.btn}>좋아요 누른 사람들</button> */}
         </div>
-
+        <div className={styles.url}>
+          <a className={styles.urldata} href={mission.page} target="_blank">광고 URL: {mission.page}</a>
+        </div>
         <ul className={styles.ul}>
           {mission.participateList.map((mission) => (
             <li key={mission._id}>{mission.account}</li>
