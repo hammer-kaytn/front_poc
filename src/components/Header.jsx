@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './header.module.css';
 import logo from '../logo.png';
-import './Register.scss';
 import { Link } from 'react-router-dom';
 
 const Header = ({ address, parentFunc }) => {

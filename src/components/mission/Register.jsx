@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import caver from '../klaytn/caver';
+import caver from '../../klaytn/caver';
 import { Container } from 'reactstrap';
 import './Register.scss';
-import * as config from '../config';
+import * as config from '../../config';
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
@@ -139,6 +139,15 @@ const Register = ({ address, tokenBalance }) => {
             </option>
             <option value="it">IT</option>
             <option value="food">음식</option>
+            <option value="beauty">뷰티</option>
+            <option value="living">홈리빙</option>
+            <option value="trip">여행</option>
+            <option value="sport">스포츠</option>
+            <option value="pet">반려동물</option>
+            <option value="meet">모임</option>
+            <option value="concert">공연</option>
+            <option value="edu">교육</option>
+            <option value="game">게임</option>
           </select>
 
           <label className="label-text">등록할 계정 주소</label>

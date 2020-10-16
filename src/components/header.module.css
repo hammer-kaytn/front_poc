@@ -11,9 +11,8 @@ body {
   background-color: white;
   font-weight: bold;
   justify-content: space-between;
-  z-index: 3;
+  z-index: 4;
 }
-
 
 .navbar a {
   float: left;
@@ -22,7 +21,7 @@ body {
   text-align: center;
   padding: 14px 16px;
   transition: all 250ms ease-in-out;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .navbar span {
@@ -56,7 +55,7 @@ body {
 .dropdown:hover .dropbtn {
   background-color: #abb0ea;
   color: white;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .dropdownContent {
@@ -125,7 +124,7 @@ body {
   }
 } */
 
-.navLink{
+.navLink {
   margin-left: 19.3%;
   width: 32.4%;
   height: 3%;

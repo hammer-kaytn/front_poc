@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+.categorylist {
+  max-width: 65rem;
+  display: flex;
+  margin: auto;
+}

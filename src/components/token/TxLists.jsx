@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import caver from '../../klaytn/caver';
 import styles from './txlist.module.css';
 import * as config from '../../config';
 
@@ -44,11 +45,11 @@ const TxLists = ({ address }) => {
                 <td>{index + 1}</td>
                 <td>
                   <a
-                    href={`https://baobab.scope.klaytn.com/tx/${txlist.transactionHash}?tabId=kctTransfer`}
+                    href={`https://baobab.scope.klaytn.com/tx/${txlist.transaction.transactionHash}?tabId=kctTransfer`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {txlist.transactionHash.substring(0, 10)}...
+                    {txlist.transaction.transactionHash.substring(0, 10)}...
                   </a>
                 </td>
                 <td>
@@ -69,7 +70,9 @@ const TxLists = ({ address }) => {
                     ? '하트링크♥'
                     : `${txlist.to.substring(0, 10)}...`}
                 </td>
-                <td>{txlist.value}</td>
+                <td>
+                  {caver.utils.fromPeb(parseInt(txlist.value, 16), 'KLAY')}
+                </td>
               </tr>
             </tbody>
           ))}

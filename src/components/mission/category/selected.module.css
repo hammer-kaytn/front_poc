@@ -26,7 +26,6 @@
   justify-content: left;
 }
 
-
 .missions {
   display: flex;
   flex-direction: row;
@@ -69,4 +68,13 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
+}
+
+.category {
+  background-color: #333;
+  overflow: hidden;
+  position: fixed;
+
+  justify-content: space-between;
+  z-index: 3;
 }

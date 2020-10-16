@@ -23,7 +23,6 @@
   text-decoration: none;
 }
 
-
 .deadline {
   width: 356px;
   height: 24px;
@@ -88,7 +87,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #adaeb9;
-  margin-left:10px;
+  margin-left: 10px;
 }
 
 .tag {
@@ -117,7 +116,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
-  margin:0 10px  0 10px;
+  margin: 0 10px 0 10px;
 }
 
 .line {
@@ -139,7 +138,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #abb0ea;
-  margin:0;
+  margin: 0;
 }
 .summary {
   width: 240px;
@@ -162,7 +161,7 @@
 }
 
 /* STATUS IMAGE */
-.statusimage{
+.statusimage {
   width: 250px;
   height: 360px;
   position: absolute;

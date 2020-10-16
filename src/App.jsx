@@ -6,13 +6,13 @@ import * as config from './config';
 import Header from './components/Header';
 import Footer from './components/Footer';
 // import Home from './components/Home';
-import Participate from './components/Participate';
-import Register from './components/Register';
-import Mymission from './components/mission/Mymission';
+import Participate from './components/mission/Participate';
+import Register from './components/mission/Register';
+import Mymission from './components/account/Mymission';
 import Myaccount from './components/account/Myaccount';
 import Token from './components/token/Token';
 import Test from './components/Test';
-import Mission from './components/Mission';
+import Mission from './components/mission/Mission';
 
 import './App.scss';
 

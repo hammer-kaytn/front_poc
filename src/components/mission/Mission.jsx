@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './Mission.module.css';
-import caver from '../klaytn/caver';
-import * as config from '../config';
+import caver from '../../klaytn/caver';
+import * as config from '../../config';
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
