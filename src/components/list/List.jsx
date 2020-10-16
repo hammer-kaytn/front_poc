@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './List.module.css';
 import { Link } from 'react-router-dom';
-import endImage from "./end_image.png"
-import ingImage from "./ing_image.png"
-
+import endImage from './end_image.png';
+import ingImage from './ing_image.png';
 
 const List = ({
   title,
@@ -27,10 +26,10 @@ const List = ({
         }}
       >
         <section className={styles.container}>
-          {status === "종료" ? (
-            <img className={styles.statusimage} src={endImage}/>
+          {status === '종료' ? (
+            <img className={styles.statusimage} src={endImage} alt="end" />
           ) : (
-            <img className={styles.statusimage} src={ingImage}/>
+            <img className={styles.statusimage} src={ingImage} alt="ing" />
           )}
           <div className={styles.mission}>
             <img className={styles.img} src={image} alt={title} />
