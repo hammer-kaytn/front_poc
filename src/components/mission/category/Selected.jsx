@@ -8,7 +8,7 @@ import Carousel from 'react-elastic-carousel';
 const Selected = ({ key, category, name }) => {
   return (
     <div id={key} className={styles.categoryWhite}>
-      <div className="padding-top-4e">
+      <div className="padding-top-5e">
         <p className="font-bold-700 font-1H font-color-lightgray">{name}</p>
         <span className={styles.intro}>
           <span className={styles.intro2}>{category.length}</span>개의 미션이

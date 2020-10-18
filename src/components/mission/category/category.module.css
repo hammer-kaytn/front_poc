@@ -1,5 +1,5 @@
 .category {
-  background-color: #333;
+  background-color: whtie;
   overflow: hidden;
   position: fixed;
   justify-content: space-between;
@@ -11,7 +11,11 @@
 .category a {
   float: left;
   display: block;
-  color: #f2f2f2;
+
+  color: #abb0ea;
+  background-color: white;
+  font-weight: bold;
+  justify-content: space-between;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -20,8 +24,8 @@
 
 /* Change the color of links on hover */
 .category a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #abb0ea;
+  color: white;
 }
 
 /* Add an active class to highlight the current page */
@@ -33,4 +37,11 @@
 /* Hide the link that should open and close the topnav on small screens */
 .category .icon {
   display: none;
+}
+
+.categoryImg {
+  width: 40px;
+  height: 40px;
+
+  text-align: center;
 }
