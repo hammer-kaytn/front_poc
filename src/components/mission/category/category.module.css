@@ -1,47 +1,54 @@
 .category {
-  background-color: whtie;
+  background-color:white;
   overflow: hidden;
-  position: fixed;
+  /* position: fixed; 수정중 fixed는 굉장히 어색한느낌이있어서 수정함 */
   justify-content: space-between;
+  margin-top: 10px;
   z-index: 3;
   width: 65rem;
+  height: 6rem;
+  display: flex;
+}
+
+.categorybox {
+  height: 30px;
+  justify-content: center;
+}
+
+.categoryimage {
+  border-radius: 50%;
+  border: #abb0ea solid 2px;
+  display: block;
+  width: 60px;
+  height: 60px;
 }
 
 /* Style the links inside the navigation bar */
 .category a {
-  float: left;
-  display: block;
-
-  color: #abb0ea;
-  background-color: white;
-  font-weight: bold;
-  justify-content: space-between;
   text-align: center;
-  padding: 14px 16px;
+  max-width: 100%;
+  display: block;
+  color: black;
+  padding-top:5px;
   text-decoration: none;
   font-size: 17px;
+  font-weight: 2px;
 }
 
+
 /* Change the color of links on hover */
-.category a:hover {
-  background-color: #abb0ea;
-  color: white;
+.categoryBtn:hover {
+  text-decoration: none;
+  color: #abb0ea;
 }
 
 /* Add an active class to highlight the current page */
-.category a.active {
+.category a:active {
   background-color: #4caf50;
-  color: white;
+  color: #abb0ea;
 }
 
 /* Hide the link that should open and close the topnav on small screens */
 .category .icon {
   display: none;
-}
-
-.categoryImg {
-  width: 40px;
-  height: 40px;
-
-  text-align: center;
 }

@@ -63,7 +63,7 @@ const App = () => {
   return (
     <Router>
       <Header address={account} parentFunc={loadAccountInfo} />
-      <div>
+      {/* <div className="main__container"> */}
         <Route
           exact
           path="/"
@@ -122,7 +122,7 @@ const App = () => {
         />
         {/* 테스트용 페이지 라우터 */}
         <Route path="/test" render={() => <Test address={account} />} />
-      </div>
+      {/* </div> */}
       <Footer />
     </Router>
   );

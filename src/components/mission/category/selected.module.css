@@ -2,36 +2,9 @@
   box-sizing: border-box;
 }
 
-.categorylist {
-  max-width: 65rem;
+.missions { 
   display: flex;
-  margin: auto;
-}
-
-.categoryGray {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
-.categoryWhite {
-  border-radius: 5px;
-  background-color: white;
-  padding: 20px;
-}
-
-.container {
-  height: 100%;
-  display: flex;
-  justify-content: left;
-}
-
-.missions {
-  display: flex;
-  flex-direction: row;
-  /* grid-template-columns: repeat(3, minmax(400px, 1fr)); */
-  grid-gap: 100px;
-  width: 1000px;
+  flex-wrap: wrap;
   padding-top: 30px;
 }
 

@@ -3,20 +3,18 @@ import List from '../list/List';
 import styles from './selected.module.css';
 import Mission from '../Mission';
 import { Link } from 'react-router-dom';
-import Carousel from 'react-elastic-carousel';
+// import Carousel from 'react-elastic-carousel'; 슬라이드바 라이브러리
 
 const Selected = ({ key, category, name }) => {
   return (
-    <div id={key} className={styles.categoryWhite}>
-      <div className="padding-top-5e">
+    <div id={key}>
         <p className="font-bold-700 font-1H font-color-lightgray">{name}</p>
         <span className={styles.intro}>
           <span className={styles.intro2}>{category.length}</span>개의 미션이
           있습니다.
         </span>
-        <section className={styles.container}>
-          <div className={styles.missions}>
-            <Carousel itemsToShow={3} transitionMs={200}>
+        <section>
+          <p className={styles.missions}>
               {category &&
                 category.map((selected, index) => (
                   <Link to={`/mission/${Mission._missionId}`}>
@@ -38,11 +36,9 @@ const Selected = ({ key, category, name }) => {
                     />
                   </Link>
                 ))}
-            </Carousel>
-          </div>
+          </p>
         </section>
       </div>
-    </div>
   );
 };
 
