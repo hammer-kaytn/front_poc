@@ -33,7 +33,7 @@ const List = ({
           )}
           <div className={styles.mission}>
             <img className={styles.img} src={image} alt={title} />
-            <h5 className={styles.title}>{title}</h5>
+            <h5 className={styles.title}>{title} 타이틀 </h5>
             <h5 className={styles.categoryandtag}>
               {category} | {tag}{' '}
             </h5>
