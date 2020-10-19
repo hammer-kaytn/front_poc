@@ -4,7 +4,7 @@ import styles from './auth.module.css';
 
 let result;
 
-const Auth = ({ address }) => {
+const Auth = ({ address, authed }) => {
   const axios = require('axios');
   const setAddress = { address };
 
@@ -72,7 +72,9 @@ const Auth = ({ address }) => {
       alert('인증번호를 정확히 입력 해 주세요.');
     } else if (result === 'success') {
       alert('본인 인증에 성공하였습니다.');
-      onSubmit();
+      {
+        authed === true ? onModify() : onSubmit();
+      }
     }
   };
 
@@ -91,24 +93,33 @@ const Auth = ({ address }) => {
     //e.preventDefault();
   };
 
-  //   const onModify = (e) => { //DB 수정 함수
-  //     const obj = {
-  //       account: setAddress.address,
-  //       phoneNumber: phoneNumber,
-  //     };
-  //     axios.post("http://localhost:5000/api/accounts/update", obj).then(
-  //       (res) => console.log(res.data)
-
-  //       //<Redirect to="/participate" />
-  //     );
-  //     //e.preventDefault();
-  //   };
+  const onModify = (e) => {
+    //DB 수정 함수
+    const obj = {
+      account: setAddress.address,
+      phoneNumber: phoneNumber,
+    };
+    axios
+      .post('http://localhost:5000/api/accounts/update', obj)
+      .then((res) =>
+        console.log(res.data)((document.location.href = '/mypage/myaccount/')),
+      );
+    //e.preventDefault();
+  };
 
   return (
     <Col xs={12} sm={8} md={10}>
       <p className="font-bold-700 font-1H padding-top-1e font-color-lightgray">
         휴대폰 본인 인증
       </p>
+      {authed === true ? (
+        <p className="keyword-yellow">
+          회원님은 이미 본인 인증을 받았습니다. :) 번호 수정을 원하시면 재 인증
+          받아주세요.
+        </p>
+      ) : (
+        ''
+      )}
       <div className="align-center padding-btm-1e">
         당신의 지갑 주소 : {address}
       </div>

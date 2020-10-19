@@ -47,8 +47,8 @@ const Myaccount = ({ address, balance, tokenSymbol, tokenBalance }) => {
               />
             </Col>
             <Col xs={12} sm={8} md={10}>
-              {/* 휴대폰 본인 인증 페이지 렌더링 */}
-              <Auth address={address} />
+              {/* 휴대폰 본인 인증 페이지 렌더링(아직 인증 되지 않았을 때)*/}
+              <Auth address={address} authed={false} />
             </Col>
           </Row>
         </Container>
@@ -69,10 +69,8 @@ const Myaccount = ({ address, balance, tokenSymbol, tokenBalance }) => {
             />
           </Col>
           <Col xs={12} sm={8} md={10}>
-            <div>
-              {address}
-              <p>회원님은 이미 휴대폰 본인 인증을 받았습니다 :)</p>
-            </div>
+            {/* 휴대폰 본인 인증 페이지 렌더링(이미 인증 되었을 때) */}
+            <Auth address={address} authed={true} />
           </Col>
         </Row>
       </Container>

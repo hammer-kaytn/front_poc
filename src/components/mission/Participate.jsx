@@ -31,40 +31,40 @@ const Participate = () => {
     SetAlls(all.data);
 
     const fashion = all.data.filter((element) => {
-      return element.category === 'fashion';
+      return element.category === '패션';
     });
     const it = all.data.filter((element) => {
-      return element.category === 'it';
+      return element.category === 'IT';
     });
     const food = all.data.filter((element) => {
-      return element.category === 'food';
+      return element.category === '음식';
     });
     const beauty = all.data.filter((element) => {
-      return element.category === 'beauty';
+      return element.category === '뷰티';
     });
     const living = all.data.filter((element) => {
-      return element.category === 'living';
+      return element.category === '홈리빙';
     });
     const trip = all.data.filter((element) => {
-      return element.category === 'trip';
+      return element.category === '여행';
     });
     const sport = all.data.filter((element) => {
-      return element.category === 'sport';
+      return element.category === '스포츠';
     });
     const pet = all.data.filter((element) => {
-      return element.category === 'pet';
+      return element.category === '반려동물';
     });
     const meet = all.data.filter((element) => {
-      return element.category === 'meet';
+      return element.category === '모임';
     });
     const concert = all.data.filter((element) => {
-      return element.category === 'concert';
+      return element.category === '공연';
     });
     const edu = all.data.filter((element) => {
-      return element.category === 'edu';
+      return element.category === '교육';
     });
     const game = all.data.filter((element) => {
-      return element.category === 'game';
+      return element.category === '게임';
     });
 
     SetFashions(fashion);
