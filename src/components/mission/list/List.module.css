@@ -140,7 +140,7 @@
   margin: 0;
 }
 .summary {
-  width: 240px;
+  width: 285px;
   height: 48px;
   font-family: NotoSansKR;
   font-size: 15px;
@@ -152,6 +152,8 @@
   text-align: left;
   color: #050505;
   margin: 0 10px 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rewarddata {

@@ -138,6 +138,9 @@
   margin:auto;
   background-color: #dadce0;
   padding-left:5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ul {
