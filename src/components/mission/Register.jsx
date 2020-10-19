@@ -12,13 +12,13 @@ const Register = ({ address, tokenBalance }) => {
   const axios = require('axios');
   // const setAddress = address;
   const [category, setCategory] = useState('fashion');
-  const [page, setPage] = useState('');
-  const [tag, setTag] = useState('');
+  const [page, setPage] = useState(null);
+  const [tag, setTag] = useState(null);
   const [goal, setGoal] = useState(0);
   const [reward, setReward] = useState(0);
-  const [title, setTitle] = useState('');
-  const [image, setImage] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState(null);
+  const [image, setImage] = useState(null);
+  const [content, setContent] = useState(null);
 
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
   // const [from, setFrom] = useState("");
@@ -63,8 +63,19 @@ const Register = ({ address, tokenBalance }) => {
     const from = address;
     const token = tokenBalance;
     const amount = caver.utils.toPeb(reward, 'KLAY');
-    // console.log(goal, amount, from, token);
-    if (reward < 0) {
+    if (title === null) {
+      alert('제목을 입력해 주세요.');
+    } else if (content === null) {
+      alert('내용을 입력해 주세요.');
+    } else if (image === null) {
+      alert('이미지 주소를 입력해 주세요.');
+    } else if (page === null) {
+      alert('목표 페이지 주소를 입력해 주세요.');
+    } else if (tag === null) {
+      alert('검색용 태그를 입력해 주세요.');
+    } else if (goal <= 0) {
+      alert('목표 좋아요 개수를 정확히 입력해 주세요.');
+    } else if (reward <= 0) {
       //원래는 reward <=0 입력해야 하나 테스트 상 0 입력하기 위해 진행
       alert('마케팅 보상 수량을 정확히 입력해 주세요.');
     } else if (parseInt(reward) > parseInt(token)) {
@@ -107,7 +118,6 @@ const Register = ({ address, tokenBalance }) => {
       goal: await goal,
       reward: await reward,
       missionId: await missionId,
-      // deadline: await deadline,
       title: await title,
       image: await image,
       content: await content,
@@ -177,7 +187,7 @@ const Register = ({ address, tokenBalance }) => {
           <input
             type="text"
             className="input-text"
-            placeholder="이미지 소스"
+            placeholder="이미지 소스 (ex: http://....)"
             onChange={onImage}
           ></input>
 
@@ -185,18 +195,33 @@ const Register = ({ address, tokenBalance }) => {
           <input
             type="text"
             className="input-text"
-            placeholder="목표 페이지 주소"
+            placeholder="목표 페이지 주소 (ex: http://....)"
             onChange={onPage}
           ></input>
 
           <label className="label-text">검색용 태그</label>
-          <input className="input-text" type="text" onChange={onTag}></input>
+          <input
+            className="input-text"
+            type="text"
+            placeholder="검색용 태그 (ex: @...)"
+            onChange={onTag}
+          ></input>
 
           <label className="label-text">목표 좋아요 개수</label>
-          <input className="number" type="number" onChange={onGoal}></input>
+          <input
+            className="number"
+            type="number"
+            placeHolder="0"
+            onChange={onGoal}
+          ></input>
 
           <label className="label-text">마케팅 보상 토큰</label>
-          <input className="number" type="number" onChange={onReward}></input>
+          <input
+            className="number"
+            type="number"
+            placeHolder="0"
+            onChange={onReward}
+          ></input>
           <input
             className="regbutton"
             type="button"
