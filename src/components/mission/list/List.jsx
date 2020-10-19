@@ -29,7 +29,7 @@ const List = ({
           {status === '종료' ? (
             <img className={styles.statusimage} src={endImage} alt="end" />
           ) : (
-            <img className={styles.statusimage} src={ingImage} alt="ing" />
+            <i className={styles.statusimage} alt="ing" />
           )}
           <div className={styles.mission}>
             <img className={styles.img} src={image} alt={title} />
