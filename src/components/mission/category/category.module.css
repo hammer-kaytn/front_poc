@@ -1,5 +1,5 @@
 .category {
-  background-color:white;
+  background-color: white;
   overflow: hidden;
   /* position: fixed; 수정중 fixed는 굉장히 어색한느낌이있어서 수정함 */
   justify-content: space-between;
@@ -29,12 +29,11 @@
   max-width: 100%;
   display: block;
   color: black;
-  padding-top:5px;
+  padding-top: 5px;
   text-decoration: none;
   font-size: 17px;
   font-weight: 2px;
 }
-
 
 /* Change the color of links on hover */
 .categoryBtn:hover {
@@ -43,10 +42,10 @@
 }
 
 /* Add an active class to highlight the current page */
-.category a:active {
+/* .category a:active {
   background-color: #4caf50;
   color: #abb0ea;
-}
+} */
 
 /* Hide the link that should open and close the topnav on small screens */
 .category .icon {
