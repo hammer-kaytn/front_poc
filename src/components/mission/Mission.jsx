@@ -215,7 +215,9 @@ const Misson = ({ match, address, tokenBalance }) => {
         </div>
         <ul className={styles.ul}>
           {mission.participateList.map((mission) => (
-            <li key={mission._id}>{mission.account}</li>
+            <li key={mission._id}>
+              {mission.account} {mission.account === address ? '(나)' : ''}
+            </li>
           ))}
         </ul>
       </section>
