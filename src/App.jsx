@@ -64,64 +64,60 @@ const App = () => {
     <Router>
       <Header address={account} parentFunc={loadAccountInfo} />
       {/* <div className="main__container"> */}
-        <Route
-          exact
-          path="/"
-          render={() => <Participate address={account} />}
-        />
-        <Route
-          exact
-          path="/mission"
-          render={() => <Participate address={account} />}
-        />
-        <Route
-          path="/register"
-          render={() => (
-            <Register address={account} tokenBalance={tokenBalance} />
-          )}
-        />
-        <Route
-          path="/mission/:missionId"
-          render={(props) => (
-            <Mission address={account} tokenBalance={tokenBalance} {...props} />
-          )}
-        />
-        <Route
-          path="/mypage/myaccount"
-          render={() => (
-            <Myaccount
-              address={account}
-              balance={balance}
-              tokenBalance={tokenBalance}
-              tokenSymbol={tokenSymbol}
-            />
-          )}
-        />
-        <Route
-          path="/mypage/mymission"
-          render={() => (
-            <Mymission
-              address={account}
-              balance={balance}
-              tokenBalance={tokenBalance}
-              tokenSymbol={tokenSymbol}
-            />
-          )}
-        />
-        <Route
-          path="/mypage/token"
-          render={() => (
-            <Token
-              address={account}
-              balance={balance}
-              tokenBalance={tokenBalance}
-              tokenSymbol={tokenSymbol}
-              parentFunc={loadAccountInfo}
-            />
-          )}
-        />
-        {/* 테스트용 페이지 라우터 */}
-        <Route path="/test" render={() => <Test address={account} />} />
+      <Route exact path="/" render={() => <Participate address={account} />} />
+      <Route
+        exact
+        path="/mission"
+        render={() => <Participate address={account} />}
+      />
+      <Route
+        path="/register"
+        render={() => (
+          <Register address={account} tokenBalance={tokenBalance} />
+        )}
+      />
+      <Route
+        path="/mission/:missionId"
+        render={(props) => (
+          <Mission address={account} tokenBalance={tokenBalance} {...props} />
+        )}
+      />
+      <Route
+        path="/mypage/myaccount"
+        render={() => (
+          <Myaccount
+            address={account}
+            balance={balance}
+            tokenBalance={tokenBalance}
+            tokenSymbol={tokenSymbol}
+          />
+        )}
+      />
+      <Route
+        path="/mypage/mymission"
+        render={() => (
+          <Mymission
+            address={account}
+            balance={balance}
+            tokenBalance={tokenBalance}
+            tokenSymbol={tokenSymbol}
+          />
+        )}
+      />
+      <Route
+        path="/mypage/token"
+        render={() => (
+          <Token
+            address={account}
+            balance={balance}
+            tokenBalance={tokenBalance}
+            tokenSymbol={tokenSymbol}
+            parentFunc={loadAccountInfo}
+          />
+        )}
+      />
+      {/* 매니저 페이지 라우터 */}
+      <Route path="/manager" render={() => <Test address={account} />} />
       {/* </div> */}
       <Footer />
     </Router>

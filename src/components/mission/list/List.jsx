@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './List.module.css';
 import { Link } from 'react-router-dom';
 import endImage from './end_image.png';
-import ingImage from './ing_image.png';
 
 const List = ({
   title,

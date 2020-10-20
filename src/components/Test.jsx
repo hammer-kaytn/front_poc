@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import caver from '../klaytn/caver';
 import * as config from '../config';
 import styles from './token/txlist.module.css';
-import { useEffect } from 'react';
+import { Container } from 'reactstrap';
 
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
@@ -74,45 +74,49 @@ const Test = ({ address }) => {
 
   return (
     <div className="padding-top-4e">
-      <div>
-        {address}
-        <input onChange={onChange}></input>
-        <input type="button" value="리워드" onClick={onReward}></input>
-        <h1 className="font-bold-700 padding-top-1e font-color-lightgray">
-          매니저 관련 테스트 페이지
-        </h1>
-        <table className={styles.txlists}>
-          <thead>
-            <tr>
-              <th className={styles.category}>카테고리</th>
-              <th className={styles.title}>제목</th>
-              <th className={styles.liked}>미션 진행상황(현재/목표)</th>
-              <th className={styles.status}>상태</th>
-            </tr>
-          </thead>
+      <Container>
+        <div>
+          {address}
+          <input onChange={onChange}></input>
+          <input type="button" value="리워드" onClick={onReward}></input>
+          <h1 className="font-bold-700 padding-top-1e font-color-lightgray">
+            매니저 페이지
+          </h1>
+          <table className={styles.txlists}>
+            <thead>
+              <tr>
+                <th className={styles.category}>미션ID</th>
+                <th className={styles.category}>카테고리</th>
+                <th className={styles.title}>제목</th>
+                <th className={styles.liked}>미션 진행상황(현재/목표)</th>
+                <th className={styles.status}>상태</th>
+              </tr>
+            </thead>
 
-          {lists &&
-            lists.map((list) => (
-              <tbody key={list._id}>
-                <tr>
-                  <td>{list.category}</td>
-                  <td>
-                    <a
-                      className={styles.titlelink}
-                      href={`/mission/${list.missionId}`}
-                    >
-                      {list.title}
-                    </a>
-                  </td>
-                  <td>
-                    {list.likes} / {list.goal}
-                  </td>
-                  <td>{list.status}</td>
-                </tr>
-              </tbody>
-            ))}
-        </table>
-      </div>
+            {lists &&
+              lists.map((list) => (
+                <tbody key={list._id}>
+                  <tr>
+                    <td>{list.missionId}</td>
+                    <td>{list.category}</td>
+                    <td>
+                      <a
+                        className={styles.titlelink}
+                        href={`/mission/${list.missionId}`}
+                      >
+                        {list.title}
+                      </a>
+                    </td>
+                    <td>
+                      {list.likes} / {list.goal}
+                    </td>
+                    <td>{list.status}</td>
+                  </tr>
+                </tbody>
+              ))}
+          </table>
+        </div>
+      </Container>
     </div>
   );
 };
