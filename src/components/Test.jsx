@@ -53,7 +53,7 @@ const Test = ({ address }) => {
       .then(
         (res) => console.log(res.data),
         alert('미션 보상이 완료되었습니다.')(
-          (document.location.href = `/test`),
+          (document.location.href = `/manager`),
         ),
       );
     //e.preventDefault();
