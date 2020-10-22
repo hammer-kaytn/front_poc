@@ -29,7 +29,9 @@ const Misson = ({ match, address, tokenBalance }) => {
   };
 
   const onLike = () => {
-    if (checkAuth === 'false') {
+    if (address === '') {
+      alert('카이카스 연결을 먼저 해 주세요.');
+    } else if (checkAuth === 'false') {
       alert('본인 인증 한 계정만 미션 참여가 가능합니다.');
     } else {
       try {

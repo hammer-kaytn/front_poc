@@ -63,7 +63,9 @@ const Register = ({ address, tokenBalance }) => {
     const from = address;
     const token = tokenBalance;
     const amount = caver.utils.toPeb(reward, 'KLAY');
-    if (title === null) {
+    if (address === '') {
+      alert('카이카스 연결을 먼저 해 주세요.');
+    } else if (title === null) {
       alert('제목을 입력해 주세요.');
     } else if (content === null) {
       alert('내용을 입력해 주세요.');
