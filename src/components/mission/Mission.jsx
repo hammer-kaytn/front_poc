@@ -130,10 +130,17 @@ const Misson = ({ match, address, tokenBalance }) => {
         );
 
         // 현재 미션에서 현재 address 참여했는지 조회
-        const mymissions = await axios.get(
-          `http://localhost:5000/api/mission/participateList/${account}`,
-        );
-        setMymissions(mymissions.data);
+        if (account !== '') {
+          const mymissions = await axios.get(
+            `http://localhost:5000/api/mission/participateList/${account}`,
+          );
+          try {
+            setMymissions(mymissions.data);
+          } catch (error) {
+            console.log(mymissions);
+            setMymissions(mymissions.data);
+          }
+        }
 
         // 본인인증 했는지 확인
         try {
