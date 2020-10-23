@@ -14,7 +14,7 @@ const Selected = ({ key, category, name }) => {
           있습니다.
         </span>
         <section>
-          <p className={styles.missions}>
+          <div className={styles.missions}>
               {category &&
                 category.map((selected, index) => (
                   <Link to={`/mission/${Mission._missionId}`}>
@@ -36,7 +36,7 @@ const Selected = ({ key, category, name }) => {
                     />
                   </Link>
                 ))}
-          </p>
+          </div>
         </section>
       </div>
   );
