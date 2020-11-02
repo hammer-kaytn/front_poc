@@ -7,7 +7,7 @@ import * as config from '../../config';
 const DEPLOYED_ADDRESS = config.DEPLOYED_ADDRESS;
 const DEPLOYED_ABI = config.DEPLOYED_ABI;
 
-let checkAuth, dueDate;
+let checkAuth, dueDate, setLikes, setPresents, code, change;
 const today = new Date().getTime();
 
 const Misson = ({ match, address, tokenBalance }) => {
@@ -125,11 +125,24 @@ const Misson = ({ match, address, tokenBalance }) => {
         );
         setMission(response.data);
         dueDate = response.data.deadline;
+        code = response.data.code;
+        setLikes = response.data.presentLikes;
 
         // 남은 기간 체크 함수 호출
         setTerm(
           Math.ceil((new Date(dueDate).getTime() - today) / (1000 * 3600 * 24)),
         );
+
+        try {
+          // 현재 미션(유투브) 좋아요 체크 후 실제 증감 수치 체크
+          const present = await axios.get(
+            `http://localhost:5000/api/youtube/${code}`,
+          );
+          setPresents = present.data.statistics.likeCount;
+          change = setPresents - setLikes;
+        } catch (error) {
+          console.log(error);
+        }
 
         // 현재 미션에서 현재 address 참여했는지 조회
         if (account !== '') {
@@ -185,7 +198,10 @@ const Misson = ({ match, address, tokenBalance }) => {
             <hr className={styles.line} />
           </div>
           <div className={styles.data}>
-            <ul className={styles.counttitle}>달성 수치</ul>
+            <ul className={styles.counttitle}>
+              달성 수치(실제 증가 수치 : {change})
+            </ul>
+
             <div className={styles.metadata}>
               <div className={styles.count}>{mission.likes}</div>
               <div className={styles.metacount}>/ {mission.goal}❤️</div>

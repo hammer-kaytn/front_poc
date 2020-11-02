@@ -19,6 +19,8 @@ const Register = ({ address, tokenBalance }) => {
   const [title, setTitle] = useState(null);
   const [image, setImage] = useState(null);
   const [content, setContent] = useState(null);
+  const [present, setPresent] = useState(0);
+  const [code, setCode] = useState(null);
 
   const contract = new caver.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS);
   // const [from, setFrom] = useState("");
@@ -123,6 +125,8 @@ const Register = ({ address, tokenBalance }) => {
       title: await title,
       image: await image,
       content: await content,
+      presentLikes: await present,
+      code: await code,
     };
     console.log(obj);
 
@@ -135,6 +139,29 @@ const Register = ({ address, tokenBalance }) => {
         ),
       );
     //e.preventDefault();
+  };
+
+  const onYoutube = async (e) => {
+    try {
+      const tempcode = page.substr(32, 11);
+      if (tempcode === null) {
+        alert('유튜브 주소를 입력해 주세요.');
+      } else {
+        axios
+          .get(`http://localhost:5000/api/youtube/${tempcode}`)
+          .then((res) => {
+            setTitle(res.data.snippet.title);
+            setContent(res.data.snippet.description.substr(0, 30));
+            setImage(res.data.snippet.thumbnails.high.url);
+            // setTag(res.data.snippet.tags);
+            setPresent(res.data.statistics.likeCount);
+            setCode(res.data.id);
+            alert('유튜브 데이터 조회 성공');
+          });
+      }
+    } catch (error) {
+      alert('에러 발생');
+    }
   };
 
   return (
@@ -161,7 +188,6 @@ const Register = ({ address, tokenBalance }) => {
             <option value="교육">교육</option>
             <option value="게임">게임</option>
           </select>
-
           <label className="label-text">등록할 계정 주소</label>
           <input
             disabled
@@ -170,11 +196,25 @@ const Register = ({ address, tokenBalance }) => {
             value={address}
             style={{ marginRight: '19%' }}
           ></input>
+          <label className="label-text">페이지 주소</label>
+          <input
+            type="text"
+            className="input-text"
+            placeholder="목표 페이지 주소 (ex: https://....)"
+            onChange={onPage}
+          ></input>
+          <input
+            className="regbutton"
+            type="button"
+            value="유튜브 조회하기"
+            onClick={onYoutube}
+          ></input>
           <label className="label-text">제목</label>
           <input
             type="text"
             className="input-text"
             placeholder="제목"
+            value={title}
             onChange={onTitle}
           ></input>
           <label className="label-text">내용</label>
@@ -182,46 +222,39 @@ const Register = ({ address, tokenBalance }) => {
             type="text"
             className="input-text"
             placeholder="내용"
+            value={content}
             onChange={onContent}
           ></input>
-
           <label className="label-text">이미지</label>
           <input
             type="text"
             className="input-text"
-            placeholder="이미지 소스 (ex: http://....)"
+            placeholder="이미지 소스 (ex: https://....)"
+            value={image}
             onChange={onImage}
           ></input>
-
-          <label className="label-text">페이지 주소</label>
-          <input
-            type="text"
-            className="input-text"
-            placeholder="목표 페이지 주소 (ex: http://....)"
-            onChange={onPage}
-          ></input>
-
           <label className="label-text">검색용 태그</label>
           <input
             className="input-text"
             type="text"
             placeholder="검색용 태그 (ex: @...)"
+            value={tag}
             onChange={onTag}
           ></input>
-
-          <label className="label-text">목표 좋아요 개수</label>
+          <label className="label-text">
+            목표 좋아요 개수 (현재 좋아요 개수 : {present})
+          </label>
           <input
             className="number"
             type="number"
-            placeHolder="0"
+            placeholder="0"
             onChange={onGoal}
           ></input>
-
           <label className="label-text">마케팅 보상 토큰</label>
           <input
             className="number"
             type="number"
-            placeHolder="0"
+            placeholder="0"
             onChange={onReward}
           ></input>
           <input
